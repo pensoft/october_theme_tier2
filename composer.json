@@ -1,0 +1,22 @@
+{
+    "name": "october/pensoft-tier2-theme",
+    "type": "october-theme",
+    "description": "Pensoft TIER2 October CMS theme",
+    "keywords": ["october", "cms", "mambo", "theme"],
+    "authors": [
+        {
+            "name": "Kremena Kaleva",
+            "email": "k.kaleva@pensoft.net",
+            "role": "Dev"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "composer/installers": "~1.0"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
