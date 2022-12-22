@@ -14,6 +14,7 @@ nav:not(.navbar){
     height: 165px;
     display: flex;
     align-items: start;
+    padding: 0 20px;
   .card-title{
     color: @dark-color;
     font-weight: normal;
@@ -63,17 +64,13 @@ nav:not(.navbar){
       font-weight: 600;
     }
 
-    .card-title:hover{
-      opacity: 0.7;
-    }
-
-
-
     .news-item{
       padding: 0px;
       //position: relative;
       margin-bottom: 30px;
       margin-right: 30px;
+        border: 1px solid white;
+        border-radius: 5px;
       //display: block;
       .news_column{
 
@@ -86,13 +83,21 @@ nav:not(.navbar){
         }
 
         .text-published{
-          color: @link-color;
+            color: @white-color;
+            background: @link-color;
             order: 2;
             text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0!important;
+            padding: 20px 25px;
+            border-bottom-right-radius: 5px;
+            border-bottom-left-radius: 5px;
         }
 
         .news-container{
-          padding: 20px 25px;
+          padding: 0!important;
           display: flex;
           flex-direction: column;
           //height: 200px;
@@ -108,8 +113,13 @@ nav:not(.navbar){
       }
 
       .news_column:hover .news-container{
-          opacity: 0.7!important;
+          opacity: 1!important;
       }
+        &:hover{
+            border: 1px solid @border-color;
+            background: #EFF5F5;
+        }
+
       .breakpoint-large-down({
         display: flex;
       });
@@ -134,9 +144,9 @@ nav:not(.navbar){
 
   .news_column{
     width: 100%;
-      border: 1px solid #D1D1D1;
       background: #EFF5F5;
       display: block;
+      border-radius: 5px;
     img{
         margin: 20px auto;
     }
@@ -256,6 +266,9 @@ nav:not(.navbar){
             margin-bottom: 0!important;
             margin-left: 10px;
             justify-content: center;
+            &:hover{
+                background: @dark-color!important;
+            }
         }
     }
 
@@ -336,12 +349,14 @@ nav:not(.navbar){
         display: flex;
         width: 100%;
         a{
-            border: 1px solid #D1D1D1;
-            background: #EFF5F5;
+            border: 1px solid @secondary-color;
+            background: @secondary-color;
+            //border-radius: 5px;
             &:hover{
-                -moz-box-shadow:  0px 0px 26px rgba(68, 208, 189, 0.3);
-                -webkit-box-shadow:  0px 0px 26px rgba(68, 208, 189, 0.3);
-                box-shadow: 0px 0px 26px rgba(68, 208, 189, 0.3);
+                //-moz-box-shadow:  0px 0px 20px rgba(24, 43, 40, 0.3);
+                //-webkit-box-shadow:  0px 0px 20px rgba(24, 43, 40, 0.3);
+                //box-shadow: 0px 0px 20px rgba(24, 43, 40, 0.3);
+                border: 1px solid @border-color;
             }
         }
 

@@ -266,13 +266,10 @@ form:
                 assetVar: 'font-family'
                 default: sofia
                 options:
-                    roboto: Roboto
                     muli: Muli
-                    helvetica: Helvetica
-                    sofia: Sofia-Pro
-                    oswald: Oswald
-                    poppins: Poppins
-                    lato: Lato
+                    gilroy: Gilroy
+                    aller: Aller
+                    nunito: Nunito
             background:
                 label: Background color
                 comment: Select a custom color to use as background

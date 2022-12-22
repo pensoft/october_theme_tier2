@@ -5,6 +5,20 @@ var documentHasScroll = function() {
     return window.innerHeight <= document.body.offsetHeight;
 };
 
+window.addEventListener('scroll', function (e) {
+    var headernavbar = document.getElementById("headernavbar");
+    var logo = document.getElementById("navbar-brand");
+    if (window.scrollY > headernavbar.offsetHeight){
+        var headerNavbarNav = document.querySelector('#headerNavbarNav')
+        headernavbar.classList.add('scrolled');
+        logo.classList.add('scrolled');
+    }else{
+        headernavbar.classList.remove('scrolled');
+        logo.classList.remove('scrolled');
+    }
+});
+
+
 $(document).ready(function() {
 	/* MENU */
 	$('.navbar-nav').attr('id', 'menu'); // please don't remove this line
@@ -20,6 +34,22 @@ $(document).ready(function() {
 	var innerWidth = $('body').innerWidth();
 	headerNavbar.width(innerWidth);
 	width100.width(innerWidth);
+
+    $('body').on('click', '.work_packages .accordion-toggle, .pilots .accordion-toggle, .messages .accordion-toggle', function () {
+        if ($(this).next(".accordion-content").is(':visible')) {
+            $(this).next(".accordion-content").slideUp(300);
+            $(this).children().find(".plusminus").text('+');
+            $(this).children(".plusminus").html('<span class="plus"></span>');
+        } else {
+            $(this).next(".accordion-content").slideDown(300);
+            $(this).children().find(".plusminus").text('-');
+            $(this).children(".plusminus").html('<span class="minus"></span>');
+        }
+    });
+
+    $('.work_packages .accordion-content, .pilots .accordion-content, .messages .accordion-toggle').each(function( index, value ) {
+        $(value).find('a').attr( "onclick", "window.open(this.href, '_blank');" )
+    });
 
     $('.nav-item').children("a").each(function(){
         if($(this).attr('data-toggle') == 'dropdown'){
@@ -333,10 +363,11 @@ function appendSignOut() {
 
 function appendSearchAndSocialMedia(){
 	var liSearch = '<li class="nav-item search_field"><a href=\"javascript: void(0);\" onclick=\"showSearchForm();\"></a></li>';
-	// var liSocial = '<li class="nav-item social"><a href=\"https://www.facebook.com/BiCIKLProjectH2020\" target=\"_blank\" class=\"pr p-facebook big\" target=\"_blank\"></a><a href=\"https://twitter.com/BiCIKL_H2020\" target=\"_blank\" class=\"pr p-twitter big\" target=\"_blank\"></a></li>';
+	var liSocial = '<li class="nav-item social">' +
+        '<a href=\"https://twitter.com/Know_Center\" target=\"_blank\" class=\"pr p-twitter medium\" target=\"_blank\"></a>' +
+        '<a href=\"https://www.linkedin.com/company/know-center/\" target=\"_blank\" class=\"pr p-linkedin medium\" target=\"_blank\"></a></li>';
 	var menu = $('#menuToggle');
-	// menu.find('>ul').append(liSearch).append(liSocial);
-	menu.find('>ul').append(liSearch);
+	menu.find('>ul').append(liSearch).append(liSocial);
 }
 
 function redirectAndRefresh(url){
@@ -793,11 +824,13 @@ function handlePilotsSVGMapMouseMove(event) {
 	}
 
 	switch (title) {
-		case 'Berlin':
-		case 'Rotterdam':
-		case 'Barcelona':
-		case 'Sheffield':
-		case 'Boston':
+		case 'Salisbury Plain':
+		case 'French Mediterranean natural reserves':
+		case 'Friedeburg':
+		case 'LTER Petrohan':
+		case 'Mols Bjerge National Park':
+		case 'Oostvaardersplassen Nature Reserve':
+		case 'Island of Comino and surrounding islets':
 			break;
 		default:
 			return tooltip.classList.remove("active");

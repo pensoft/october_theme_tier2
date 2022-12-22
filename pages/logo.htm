@@ -4,7 +4,7 @@ layout = "default"
 is_hidden = 0
 robot_index = "index"
 robot_follow = "follow"
-header_image = "media.jpg"
+header_image = "about.jpg"
 
 [builderList mediaLogosList]
 modelClass = "pensoft\Media\Models\MediaLogos"
@@ -27,7 +27,7 @@ function onStart(){
 		$file_name = $file->getLocalPath();
 
 $ext= $file->getExtension();
-$recordName = get('file_name') ? get('file_name') : 'MAMBO_logo.'.$ext;
+$recordName = get('file_name') ? get('file_name') : 'TIER2_logo.'.$ext;
 
 if (file_exists($file_name)) {
 header('Content-Description: File Transfer');
