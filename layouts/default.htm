@@ -72,7 +72,7 @@ update_selector = "#gdpr-reload"
     </header>
 
     <!-- Content -->
-    <section id="layout-content" class="{{this.page.id}}" {% if user and this.page.id != 'home' %} style="margin-top: 150px;" {% endif %}>
+    <section id="layout-content" class="{{this.page.id}}">
         {% page %}
         {% component 'googleTracker' %}
     </section>

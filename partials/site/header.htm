@@ -65,15 +65,14 @@ numberOfLevels = 2
 
 
 
-{% if this.theme.header_image %}
+{% if this.theme.header_image and page_id != 'search' %}
 <div class="header-image {{page_id}}">
-    {%if this.page.header_image %}
+    {%if this.page.header_image  and page_id != 'search' %}
     <div class="header-image-bar" style="background-image: url('{{this.page.header_image|media}}'); background-position: left center;"></div>
-    {%else%}
-    <div class="header-image-bar" style="background-image: url('{{this.theme.header_image.getPath()}}'); background-position: left center;"></div>
+
     {%endif%}
     <div class="jumbotron" data-aos="fade-right">
-        {% if page_id != 'home'%}
+        {% if page_id != 'home' and page_id != 'search' %}
             <h1 class="underline white">
             {%if page_title%} {{page_title}} {%else%} {{site_name}} {%endif%}</h1>
         {%endif%}
