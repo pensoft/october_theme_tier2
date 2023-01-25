@@ -5,7 +5,6 @@ is_hidden = 0
 robot_index = "index"
 robot_follow = "follow"
 header_image = "partners.jpg"
-
 ==
 <?php
 use Pensoft\Articles\Models\Article;
@@ -91,7 +90,7 @@ $this['related'] = $related;
         <div class="col-xs-12 col-md-5">
             {% if article.cover %}
             <div class="row">
-                <img class="content left" src="{{ article.cover|crop_image|resize(673, 411, { mode: 'crop' }) }}" />
+                <img class="content left" src="{{ article.cover|crop_image|resize(673, auto, { mode: 'crop' }) }}" />
             </div>
             {% endif %}
             <div class="row share_container middle-xs">

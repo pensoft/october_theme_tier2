@@ -222,6 +222,13 @@ p:has(.edit-link){
                 });
             }
 
+            span{
+                color:#ffffff;    
+                text-shadow: 6px 0 #ffffff;
+                letter-spacing: 6px;
+                font-weight: bold;
+            }
+
             .breakpoint-laptop-down({
                 padding-left: 50px;
             });
@@ -255,6 +262,7 @@ p:has(.edit-link){
           justify-content: end;
           .breakpoint-small-down({
               width: 100%;
+              height: auto;
           });
       }
 
@@ -916,7 +924,15 @@ now override the 3.3 new styles for modern browsers & apply opacity
 
 }
 
+.cc_container .cc_message{
+    color: white!important;
+}
 
 
-
-
+.no-transition * {
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -ms-transition: none !important;
+    -o-transition: none !important;
+    transition: none !important;
+}

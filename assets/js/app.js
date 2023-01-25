@@ -20,6 +20,7 @@ window.addEventListener('scroll', function (e) {
 
 
 $(document).ready(function() {
+    // $("nav").removeClass("no-transition");
 	/* MENU */
 	$('.navbar-nav').attr('id', 'menu'); // please don't remove this line
 	$( '<div class="calendar-top"></div>' ).insertBefore( "#calendar" );
@@ -56,6 +57,8 @@ $(document).ready(function() {
             $(this).removeAttr('data-toggle')
         }
     });
+
+    $("nav").removeClass("no-transition");
 
     if (window.location.hash) {
         var link = window.location.hash;
