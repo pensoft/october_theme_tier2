@@ -13,6 +13,7 @@ use Pensoft\Cardprofiles\Models\Profiles;
 
 function onStart(){
 	$this['partners'] =  Partners::where('type', 1)->get();
+	$this['a_partners'] =  Partners::where('type', '!=', 1)->get();
 $this['members'] = Profiles::where('category_id',  1)->get();
 
 }
@@ -54,6 +55,25 @@ return Profiles::where('partner_id', $id)->where('category_id',  1)->get();
                     <div class="col-xs-12">
                         {% for partner in partners %}
                         <a class="parener_logo" onclick="onCustomSinglePartner({{partner.id}});" title="{{partner.instituion}}"><img class="partner_cover" src="{{partner.cover.thumb(116, auto, {'mode':'crop'})}}"></a>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="row assoc_partners half-a-border-on-top">
+                    <div class="col-xs-12">
+                        {% for item in a_partners %}
+                        <div class="row partner-item middle-xs">
+                            <div class="col-md-3 col-xs-12"><a class="parener_logo" href="{{item.instituion_url}}" target="_blank" title="{{item.instituion}}"><img class="partner_cover" src="{{item.cover.thumb(116, auto, {'mode':'crop'})}}"></a></div>
+                            <div class="col-md-9 col-xs-12">
+                                <div class="assoc_partner_title partner_title mb-2">
+                                    <a href="{{item.instituion_url}}" title="{{item.instituion}}" target="_blank">{{item.instituion}}</a>
+                                </div>
+                                <div class="assoc_partner_info partner_description mb-2">
+                                    {{item.content|raw}}
+                                </div>
+                            </div>
+                        </div>
+
+
                         {% endfor %}
                     </div>
                 </div>

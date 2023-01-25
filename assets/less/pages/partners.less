@@ -47,6 +47,36 @@ ul.partners_logos_list li{
         margin: 15px 2px 15px 3px;
     });
 }
+
+
+.assoc_partners{
+    padding: 30px 0;
+    margin-top: 30px;
+    &.half-a-border-on-top {
+        border-top:2px solid #C3C4D7;
+        position: relative;
+
+        &:after {
+            padding:0;margin:0;display:block;/* probably not really needed? */
+            content: "";
+            width:50%;
+            height:4px;/* slight higher to work around rounding errors(?) on some zoom levels in some browsers. */
+            background-color:white;
+            position: absolute;
+            right:0;
+            top:-6px;
+        }
+    }
+
+    .partner_title a{
+        color: @default-color;
+        &:hover{
+            opacity: 0.7;
+        }
+    }
+
+}
+
 //
 //.partner_cover.width{
 //  height: 160px;
