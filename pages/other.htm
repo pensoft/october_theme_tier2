@@ -1,19 +1,19 @@
-title = "Presentations"
+title = "Other"
 layout = "default"
-url = "/media-center/presentations"
+url = "/media-center/other"
 header_image = "about.jpg"
 
 ==
 <?php
-use Pensoft\Media\Models\Presentations;
+use Pensoft\Media\Models\Graphic;
 use System\Models\File;
 
 function onStart(){
-	$this['recordsList'] =  Presentations::get();
+	$this['recordsList'] =  Graphic::get();
 	if(post('download')){
 		$file = File::find((int)post('download'));
 		$file_name = $file->getLocalPath();
-$recordName = post('file_name') ? post('file_name') : 'TIER2_presentations';
+$recordName = post('file_name') ? post('file_name') : 'TIER2_other';
 $ext= $file->getExtension();
 
 if (file_exists($file_name)) {
@@ -31,7 +31,7 @@ flush();
 readfile($file_name);
 exit();
 }
-return Redirect::to('/media-center/presentations');
+return Redirect::to('/media-center/other');
 }
 }
 ?>
@@ -52,7 +52,7 @@ return Redirect::to('/media-center/presentations');
         <div class="col-md-2 col-xs-12 mt-4">
             <div class="text-center">
                 <span class="card_title">{{record.name}}</span><br>
-                <span class="card_image_container" style="background: url({{record.presentation_image.thumb(220, 220,{'mode':'crop'})}}) center center no-repeat;" title="{{record.name}}"></span>
+                <span class="card_image_container" style="background: url({{record.image.thumb(220, 220,{'mode':'crop'})}}) center center no-repeat;" title="{{record.name}}"></span>
                 <br><a href="{{ record.file.path }}#{{record.file.file_name}}" target="_blank" title="{{record.name}}" class="btn btn-primary">Download</a>
             </div>
         </div>
