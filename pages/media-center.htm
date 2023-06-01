@@ -5,6 +5,8 @@ is_hidden = 0
 robot_index = "index"
 robot_follow = "follow"
 header_image = "about.jpg"
+
+[siteSearchInclude]
 ==
 <?php
 use Pensoft\Media\Models\MediaLogos;
@@ -26,7 +28,7 @@ function onStart(){
 }
 ?>
 ==
-<div class="container-fluid bg_media">
+{% component 'siteSearchInclude' %}<div class="container-fluid bg_media">
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-xs-12">
@@ -36,7 +38,7 @@ function onStart(){
                         <div class="card-container text-center">
                             <a href="{{url('media-center')}}/logo" title="Logo">
                                 <span class="card_image_container" style="background: url({{'pensoft/media1.svg'|media}}) center center no-repeat;" href="{{url('media-center')}}/logo" title="Logo"></span>
-                                <span class="media_label">Logo pack</span>
+                                <span class="media_label">Logo</span>
                             </a>
                         </div>
                     </div>
@@ -114,4 +116,3 @@ function onStart(){
 
     </div>
 </div>
-

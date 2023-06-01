@@ -64,6 +64,17 @@
       .dropdown-menu{
         background: @link-color;
           border-radius: 10px;
+          li{
+              a{
+                  &:hover:before {
+                        background: transparent!important;
+                    }
+              }
+
+              &.active a:before {
+                  background:transperant!important;
+              }
+          }
       }
     }
 
@@ -105,7 +116,7 @@
                 cursor: pointer;
                 text-align: center;
 
-                &>a {
+                a:first-child{
                     padding-left: 0.5rem;
                     padding-right: 0.5rem;
                     padding-top: 0.4rem;
@@ -118,8 +129,6 @@
                     display: inline-block;
                     position: relative;
 
-                    &:hover {
-                    }
                     &:hover:before {
                         content: "";
                         position: absolute;
@@ -132,22 +141,35 @@
                     }
                 }
 
-                &.active a:before {
-                    content: "";
-                    position: absolute;
-                    background: white;
-                    width: 7px;
-                    height: 7px;
-                    border-radius: 100%;
-                    left: -5px;
-                    margin-top: 9px!important;
-                }
+                &.active{
+                    a:before {
+                        content: "";
+                        position: absolute;
+                        background: white;
+                        width: 7px;
+                        height: 7px;
+                        border-radius: 100%;
+                        left: -5px;
+                        margin-top: 9px!important;
+                    }
+
+                    
+
+                      .dropdown-menu a:before {
+                          background:transparent!important;
+                      }
+
+                } 
+
+                
 
                 background-color: inherit;
 
             }
         }
     }
+
+    
 
 
     .breakpoint-large({
@@ -190,7 +212,7 @@
                         .dropdown-menu {
                           display: none;
                         position: absolute;
-                        top: 75px;
+                        top: 65px;
                         padding: 15px 85px 15px 19px!important;
                         margin-left: 15px;
                             a{

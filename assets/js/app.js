@@ -272,7 +272,7 @@ $(document).ready(function() {
 
 	$('.news .news-container, .news .news-image').removeClass('col-xs-12').removeClass('center-xs');
 
-	$('.partners .partner_description, .partners .list-item-body').each(function(){
+	$('.partners .partner_description, .partners .list-item-body, .card-profiles .card-profile .card-body').each(function(){
 		var countParagraphs = $(this).find('p').length;
 		if(countParagraphs > 1) {
 			$(this).find('p').first().append('<div class="dorsal">Read more</div>');
