@@ -1,0 +1,17 @@
+url = "/open-call"
+layout = "default"
+title = "Open Call"
+
+[siteSearchInclude]
+
+[jumbotron]
+jumbotron = "open-call-projects"
+title = 0
+background = "transperant"
+templates = "template1"
+description_limit = 0
+==
+{% component 'siteSearchInclude' %}
+<div class="container open_call_projects_container">
+		{% component 'jumbotron' %}
+	</div>

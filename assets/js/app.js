@@ -36,7 +36,7 @@ $(document).ready(function() {
 	headerNavbar.width(innerWidth);
 	width100.width(innerWidth);
 
-    $('body').on('click', '.work_packages .accordion-toggle, .pilots .accordion-toggle, .messages .accordion-toggle', function () {
+    $('body').on('click', '.work_packages .accordion-toggle, .pilots .accordion-toggle, .messages .accordion-toggle, .award-faqs .accordion-toggle', function () {
         if ($(this).next(".accordion-content").is(':visible')) {
             $(this).next(".accordion-content").slideUp(300);
             $(this).children().find(".plusminus").text('+');
@@ -48,7 +48,12 @@ $(document).ready(function() {
         }
     });
 
-    $('.work_packages .accordion-content, .pilots .accordion-content, .messages .accordion-toggle').each(function( index, value ) {
+    $('.work_packages .accordion-content, .pilots .accordion-content, .messages .accordion-toggle, .award-faqs .accordion-toggle').each(function( index, value ) {
+        $(value).find('a').attr( "onclick", "window.open(this.href, '_blank');" )
+    });
+
+    
+    $('.award-faqs .accordion-content').each(function( index, value ) {
         $(value).find('a').attr( "onclick", "window.open(this.href, '_blank');" )
     });
 
@@ -370,7 +375,7 @@ function appendSearchAndSocialMedia(){
 	var liSearch = '<li class="nav-item search_field"><a href=\"javascript: void(0);\" onclick=\"showSearchForm();\"></a></li>';
 	var liSocial = '<li class="nav-item social">' +
         '<a href=\"https://twitter.com/Know_Center\" target=\"_blank\" class=\"pr p-twitter medium\" target=\"_blank\"></a>' +
-        '<a href=\"https://www.linkedin.com/company/know-center/\" target=\"_blank\" class=\"pr p-linkedin medium\" target=\"_blank\"></a></li>';
+        '<a href=\"https://www.linkedin.com/company/tier2-project/\" target=\"_blank\" class=\"pr p-linkedin medium\" target=\"_blank\"></a></li>';
 	var menu = $('#menuToggle');
 	menu.find('>ul').append(liSearch).append(liSocial);
 }

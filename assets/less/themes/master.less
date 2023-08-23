@@ -78,46 +78,6 @@ p:has(.edit-link){
     margin-left: 0!important;
   });
 }
-//
-//.container.homepage{
-//    position: absolute;
-//    width: 50%;
-//    //background: rgba(42, 58, 78, 0.6);
-//    background: rgba(0, 0, 0, 0.6);
-//    height: 100vh;
-//    top: 0;
-//    left: 0;
-//    color: white;
-//    backdrop-filter: blur(30px);
-//    transform:none!important;
-//    display: flex;
-//    align-items: center;
-//    justify-content: center;
-//    flex-direction: column;
-//    padding-top: unset!important;
-//    padding-bottom: unset!important;
-//    z-index: 2;
-//    padding-left: 0;
-//    padding-right: 0;
-//
-//
-//    .breakpoint-laptop-down({
-//        width: 50%;
-//        align-items: start;
-//        justify-content: start;
-//    });
-//    .breakpoint-small-down({
-//        width: 100%;
-//        display: flex;
-//        align-items: start;
-//        justify-content: start;
-//        backdrop-filter: none;
-//    });
-//
-//
-//}
-
-
 
 .header-image{
     overflow: hidden;
@@ -237,6 +197,68 @@ p:has(.edit-link){
                 max-width: 100%;
                 padding-left: 20px;
             });
+        }
+    }
+
+    &.open-call-projects {
+        .header-image-bar {
+            height: 100vh;
+            position: relative;
+            background: url(../../../../storage/app/media/technology-background.png) center no-repeat!important;
+            background-size: cover!important;
+            //.breakpoint-large-down({
+            //    height: 100vh;
+            //    margin-top: 0;
+            //});
+        }
+        h1 {
+            &.underline {
+                border-bottom: none;
+                //.breakpoint-small-down({
+                //    font-size: 55px;
+                //    white-space: nowrap;
+                //    padding: 0;
+                //});
+            }
+        }
+
+        .open-call-intro{
+            width: 70%;
+            .breakpoint-large-down({
+                width: 100%;
+            });
+            .white_intro{
+                color: #EFF5F8;
+                font-size: 70px;
+                line-height: 86px;
+                font-weight: bold;
+                font-family: Gilroy;
+                display: inline-block;
+                width: 100%;
+                .breakpoint-large-down({
+                    font-size: 40px;
+                    line-height: 56px;
+                });
+            }
+            .green_intro{
+                font-size: 59px;
+                line-height: 72px;
+                font-weight: bold;
+                color: #33DBCE;
+                font-family: Gilroy;
+                margin-top: 40px;
+                display: inline-block;
+                width: 100%;
+                .breakpoint-large-down({
+                    font-size: 30px;
+                    line-height: 46px;
+                });
+            }
+            .btn-primary{
+                width: 220px;
+                max-width: 80%;
+                margin-top:50px;
+            }
         }
     }
 }
@@ -935,4 +957,137 @@ now override the 3.3 new styles for modern browsers & apply opacity
     -ms-transition: none !important;
     -o-transition: none !important;
     transition: none !important;
+}
+
+.open_call_projects_container{
+    padding-top: 0!important;
+    position: relative;
+
+    p{
+        padding-left: 133px;
+    }
+
+    ul{
+        padding-left: 133px;
+        list-style-type: none;
+        li{
+            display: flex;
+            align-items: center;
+            line-height: 20px;
+        }
+        
+        li::before {
+            content: " ";
+            background: #58dbce;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            /* line-height: 20px; */
+            display: inline-flex;
+            margin-left: 5px;
+            margin-right: 12px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            align-items: center;
+            line-height: 20px;
+          }
+    }
+
+    h4{
+       
+        line-height: 88px;
+        font-size: 46px;
+        font-weight: bold;
+        position: relative;
+        display: flex;
+        left: 30px;
+        .breakpoint-large-down({
+            line-height: 59px;
+            font-size: 46px;
+            font-weight: bold;
+        });
+        &:before {
+            content: "";
+            display: inline-block;
+            width: 99px;
+            height: 88px;
+            background: url(../../../../storage/app/media/bullet.svg) left center no-repeat;
+            background-size: 99px 88px;
+            position: relative;
+            left: -23px;
+            top: 7px;
+        }
+    }
+
+    .contact .row{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 50px;
+        flex-wrap: nowrap;
+
+      .profile-item{
+        max-width: 49%!important;
+        margin: 0 auto;
+          color: black;
+        //.breakpoint-laptop-down({
+        //  max-width: 70%!important;
+        //});
+        .breakpoint-small-down({
+          max-width: 100%!important;
+            margin-bottom: 20px;
+            align-items: center;
+            justify-content: center;
+        });
+
+        h2{
+            font-size: 26px!important;
+            color: #0D2557;
+            font-family: Gilroy;
+            font-weight: bolder;
+        }
+      }
+
+      .contact_mail{
+          white-space: nowrap;
+          font-family: Gilroy;
+          padding-left: 0;
+          .p-mail {
+            margin-right: 0px;
+          }
+      }
+
+      .coordinator_image{
+        background: url("../../assets/images/contact.svg") top left no-repeat;
+        width: 212px;
+        max-width: 212px!important;
+        height: 277px;
+        margin-right: 20px;
+        margin-left: 20px;
+        background-size: contain;
+        display: flex;
+        //align-items: center;
+        justify-content: center;
+        padding-top: 22px;
+        img{
+            border-radius: 50%;
+            width: 167px;
+            height: 167px;
+            filter: grayscale(100%);
+            object-fit: cover;
+            &.no-image{
+                width: 77px;
+                height: 77px;
+                background: @secondary-color;
+                border-radius: 50%;
+                padding: 20px;
+            }
+
+        }
+        .breakpoint-small-down({
+            margin: 0 auto 30px auto;
+        });
+    }
+
+    }
 }

@@ -1,0 +1,21 @@
+url = "/award-faqs"
+layout = "default"
+title = "Award FAQs"
+
+[siteSearchInclude]
+
+[accordion award_faqs]
+maxItems = 20
+accordion = 2
+elementId = "award_faqs"
+active = 0
+collapsible = "false"
+heightStyle = "auto"
+iconsHeader = "ui-icon-triangle-1-e"
+iconsHeaderActive = "ui-icon-triangle-1-s"
+templates = "template3"
+==
+{% component 'siteSearchInclude' %}
+<div class="container advisory-board-container2">
+		{% component 'award_faqs' %}
+	</div>

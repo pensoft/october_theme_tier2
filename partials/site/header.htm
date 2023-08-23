@@ -73,7 +73,7 @@ numberOfLevels = 2
         {%endif%}
     {%endif%}
     <div class="jumbotron" data-aos="fade-right">
-        {% if page_id != 'home' and page_id != 'search' %}
+        {% if page_id != 'home' and page_id != 'search' and page_id != 'open-call-projects' %}
             <h1 class="underline white">
             {%if page_title%} {{page_title}} {%else%} {{site_name}} {%endif%}</h1>
         {%endif%}
@@ -82,6 +82,15 @@ numberOfLevels = 2
             <div class="intro">
             <div class="logo_main"></div>
             <p>{{tag_line|raw}}</p>
+            </div>
+        </div>
+        {% endif %}
+        {% if page_id == 'open-call-projects'%}
+        <div class="container">
+            <div class="open-call-intro">
+            <span class="white_intro">TIER2 Awards for Establishing<br> a Reproducibility Network</span>
+            <span class="green_intro">The 2023 open call is now closed</span>
+            <a class="btn btn-primary" href="{{'newapplicationformtemplate_13.07.docx'|media}}">Apply</a>            
             </div>
         </div>
         {% endif %}
