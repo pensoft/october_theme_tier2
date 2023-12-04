@@ -43,8 +43,12 @@
 }
 
 .bg_media{
-    background: url("../../assets/images/media-centre.svg") right no-repeat;
+    background: url("../../assets/images/media-centre.svg") bottom right no-repeat;
     background-size: auto 530px;
+    .breakpoint-laptop-down({
+        background: url("../../assets/images/media-centre.svg") bottom right no-repeat;
+        background-size: 40%;
+    });
     .breakpoint-small-down({
         background: url("../../assets/images/media-centre.svg") bottom center no-repeat;
         background-size: contain;

@@ -86,6 +86,8 @@ $(document).ready(function() {
         }
     }
 
+    
+
     $('.dropdown a').click(function(event) {
 
         if (location.href.indexOf("#") != -1) {
@@ -783,6 +785,11 @@ function onCustomSinglePartner(pId) {
     });
 }
 
+function scrollUp(){
+	var element = $('#layout-content');
+	$("html, body").animate({ scrollTop: element.offset().top - 94 }, 'slow');
+}
+
 function init() {
     window.addEventListener('resize', function () {
         if (isBreakpointLarge()) {
@@ -817,10 +824,12 @@ function init() {
         }
 		appendSearchAndSocialMedia()
 		requestFormLibrary()
+        
 		// requestFormPartners()
         // keepFooter(documentHasScroll());
 
     });
+    $('.accordion-border').removeAttr('id');
     // appendProfile()
     // appendSignIn()
     // appendSignOut()

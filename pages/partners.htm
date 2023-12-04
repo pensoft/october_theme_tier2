@@ -5,7 +5,6 @@ is_hidden = 0
 robot_index = "index"
 robot_follow = "follow"
 header_image = "about.jpg"
-
 ==
 <?php
 use Pensoft\Partners\Models\Partners;
@@ -61,7 +60,7 @@ return Profiles::where('partner_id', $id)->where('category_id',  1)->get();
                 <div class="row assoc_partners half-a-border-on-top">
                     <div class="col-xs-12">
                         {% for item in a_partners %}
-                        <div class="row partner-item middle-xs">
+                        <div class="row partner-item middle-xs aff">
                             <div class="col-md-3 col-xs-12"><a class="parener_logo" href="{{item.instituion_url}}" target="_blank" title="{{item.instituion}}"><img class="partner_cover" src="{{item.cover.thumb(116, auto, {'mode':'crop'})}}"></a></div>
                             <div class="col-md-9 col-xs-12">
                                 <div class="assoc_partner_title partner_title mb-2">
@@ -80,6 +79,7 @@ return Profiles::where('partner_id', $id)->where('category_id',  1)->get();
                 <div class="row container partners-map-container">
                     <div id="mycomponentpartners" class="row">
                     </div>
+                    
                 </div>
             </div>
             <div class="col-md-5 col-xs-12"></div>

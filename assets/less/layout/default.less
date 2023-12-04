@@ -3,9 +3,9 @@
     padding-right: 0.5rem;
     padding-left: 0.5rem;
      //padding-top: @padding-base-space-home * 2.5;
-    padding-top: 100px;
+    padding-top: 50px;
     //padding-bottom: @padding-base-space-home * 2.5;
-    padding-bottom: 100px;
+    padding-bottom: 50px;
     margin-right: auto;
     margin-left: auto;
 
@@ -22,7 +22,8 @@
         max-width: 1600px;
     });
     &.highlights-news{
-        padding-bottom: 75px;
+        padding-bottom: 0;
+        padding-top: 0!important;
     }
 }
 
@@ -33,10 +34,10 @@
 
 .about{
     
-.container-fluid {
+.container-fluid:not(.bg-secondary){
     .container:first-child{
-        padding-top: 50px!important;
-        padding-bottom: 50px!important;
+        padding-top: 0px;
+        padding-bottom: 0px;
     }
 }
 }

@@ -227,8 +227,9 @@ p:has(.edit-link){
 
         .open-call-intro{
             width: 70%;
-            .breakpoint-large-down({
+            .breakpoint-huge-down({
                 width: 100%;
+                padding-top: 90px;
             });
             .white_intro{
                 color: #EFF5F8;
@@ -238,6 +239,10 @@ p:has(.edit-link){
                 font-family: Gilroy;
                 display: inline-block;
                 width: 100%;
+                .breakpoint-laptop-down({
+                    font-size: 50px;
+                    line-height: 66px;
+                });
                 .breakpoint-large-down({
                     font-size: 40px;
                     line-height: 56px;
@@ -252,6 +257,10 @@ p:has(.edit-link){
                 margin-top: 40px;
                 display: inline-block;
                 width: 100%;
+                .breakpoint-laptop-down({
+                    font-size: 40px;
+                    line-height: 56px;
+                });
                 .breakpoint-large-down({
                     font-size: 30px;
                     line-height: 46px;
@@ -355,6 +364,10 @@ p:has(.edit-link){
           margin-top: 20px;
         });
       }
+    }
+
+    .container:has(.footer-menu-container){
+        padding-bottom: 0;
     }
 
     .funding {
@@ -996,30 +1009,23 @@ now override the 3.3 new styles for modern browsers & apply opacity
           }
     }
 
-    h4{
-       
-        line-height: 88px;
+    h4{       
+        line-height: 70px;
         font-size: 46px;
         font-weight: bold;
         position: relative;
         display: flex;
         left: 30px;
+        background: url(../../../../storage/app/media/bullet.svg) left center no-repeat;
+        background-size: 85px;
+        background-position-y: 3px;
+        padding-left: 100px;
+
         .breakpoint-large-down({
             line-height: 59px;
             font-size: 46px;
             font-weight: bold;
         });
-        &:before {
-            content: "";
-            display: inline-block;
-            width: 99px;
-            height: 88px;
-            background: url(../../../../storage/app/media/bullet.svg) left center no-repeat;
-            background-size: 99px 88px;
-            position: relative;
-            left: -23px;
-            top: 7px;
-        }
     }
 
     .contact .row{
@@ -1058,6 +1064,10 @@ now override the 3.3 new styles for modern browsers & apply opacity
           .p-mail {
             margin-right: 0px;
           }
+          .breakpoint-laptop-down({
+              white-space: normal;
+              word-break: break-all;
+          });
       }
 
       .coordinator_image{
@@ -1086,11 +1096,60 @@ now override the 3.3 new styles for modern browsers & apply opacity
                 padding: 20px;
             }
 
+            .breakpoint-laptop-down({
+                width: 147px;
+                height: 147px;
+            });
+
         }
+        .breakpoint-laptop-down({
+            width: 192px;
+            max-width: 192px!important;
+            height: 257px;
+            margin-right: 10px;
+            margin-left: 10px;
+        });
         .breakpoint-small-down({
             margin: 0 auto 30px auto;
         });
     }
 
     }
+}
+
+.container:has(.highlights-news){
+    padding-top: 0!important;
+}
+
+#mycomponentpartners{
+    position: relative;
+}
+.scroll_up_arrow{
+  border-radius: 50%;
+  background: @link-color url(../../assets/images/arrow_down-1.svg) center no-repeat;
+  background-size: 30%;
+  width: 50px;
+  height: 50px;
+//   margin-right: 3%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+//   right: 50%;
+  z-index: 99;
+  display: flex;
+  justify-content: center;
+  vertical-align: middle;
+  transform: rotate(180deg);
+  &:hover{
+      background: @dark-color url(../../assets/images/arrow_down-1.svg) center no-repeat;
+      background-size: 30%;
+      opacity: 0.7;
+      cursor: pointer;
+  }
+  a, a:hover{
+      width: 100%;
+      display: block;
+  }
+  
+
 }

@@ -47,7 +47,7 @@ return Redirect::to('/media-center/presentations');
         {% for record in records %}
         {# Use spaceless tag to remove spaces inside the A tag. #}
         {% spaceless %}
-        <div class="col-md-2 col-xs-12 mt-4">
+        <div class="col-md-3 col-xs-12 mt-4">
             <div class="text-center">
                 <span class="card_title" style="display: block; height: 75px;">{{record.name}}</span><br>
                 <span class="card_image_container" style="background: url({{record.presentation_image.thumb(220, 220,{'mode':'crop'})}}) center center no-repeat;" title="{{record.name}}"></span>
