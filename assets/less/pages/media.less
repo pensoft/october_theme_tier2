@@ -101,3 +101,33 @@
     font-weight: 500;
   }
 }
+
+
+.videos .tabs{
+    width: 100%;
+    display: block;
+
+    margin-bottom: 40px;
+    margin-top: 40px;
+
+    .breakpoint-small-down({
+        text-align: center;
+    });
+    a{
+        width: fit-content;
+        font-weight: bold;
+        cursor: pointer;
+        color: @link-color;
+        margin-right: 40px;
+        .breakpoint-small-down({
+            margin-left: 0px;
+            width: 100%;
+            text-align: center;
+        });
+
+        &.active{
+            opacity: 0.6;
+        }
+    }
+
+}
