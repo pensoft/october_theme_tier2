@@ -1,6 +1,6 @@
-title = "Videos"
 url = "/media-center/videos"
 layout = "default"
+title = "Videos"
 is_hidden = 0
 robot_index = "index"
 robot_follow = "follow"
@@ -65,7 +65,7 @@ return Redirect::to('/media-center/videos');
         {# Use spaceless tag to remove spaces inside the A tag. #}
         {% spaceless %}
         <div class="col-xs-12 col-md-6" id="accordion-documents">
-            <p>{{record.name}}</p>
+            <p style="min-height: 50px;">{{record.name}}</p>
             {% if record.file %}
             <video controls="" height="360px" width="570px"><source src="{{record.file.path}}" type="video/mp4"></video>
 

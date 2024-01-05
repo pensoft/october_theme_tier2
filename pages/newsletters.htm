@@ -61,11 +61,19 @@ return Redirect::to('/media-center/newsletters');
 		{# Use spaceless tag to remove spaces inside the A tag. #}
 		{% spaceless %}
 		{% if record.newsletter_image %}
-		<div class="col-md-2 col-xs-12">
+		<div class="col-md-4 col-xs-12">
 			<div class="text-center">
 				<span class="card_image_container" style="background: url({{record.newsletter_image.thumb(220,220,{'mode':'crop'})}}) center center no-repeat;" title="{{record.name}}"></span>
-				<span class="card_title" style="min-height: 100px;">{{record.name}}, {{record.date |date('F Y')}}</span>
-				<br><br><a href="{{ record.file.path }}#{{record.file.file_name}}" target="_blank" title="{{record.name}}" class="btn btn-primary">Download</a>
+				<span class="card_title">{{record.name}}</span>
+				<span class="date" style="color: #33dbce;">{{record.date |date('F Y')}}</span><br><br>
+				{% if record.url %}
+				<p><a class="btn btn-primary" style="max-width: unset" href="{{record.url}}" target="_blank">Read the newsletter</a></p>
+                {% endif %}
+                {% if record.file %}
+                <p><a href="{{ record.file.path }}#{{record.file.file_name}}" target="_blank" title="{{record.name}}" class="btn btn-primary">Download</a></p>
+                {% endif %}
+
+				
 			</div>
 		</div>
 

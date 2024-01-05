@@ -11,7 +11,23 @@ templates = "template5"
 has_search = 1
 add_file_name = 1
 no_records_message = "No records found"
+
+[jumbotron]
+jumbotron = "library-intro-banner"
+background = "transperant"
+templates = "template1"
+description_limit = 0
 ==
+<div class="container-fluid bg-secondary">
+    <div class="container library_banner">
+        <div class="row middle-xs">
+            <div class="col-xs-12">
+                  {% component 'jumbotron' %}  
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="container">
 	
 	{% component 'LibraryPage' %}
