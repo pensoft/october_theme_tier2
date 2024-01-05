@@ -47,7 +47,12 @@ update_selector = "#gdpr-reload"
     })(window,document,'script','dataLayer','GTM-M2QSR6D');</script>
     <!-- End Google Tag Manager -->
 
-    {% component 'metaList' %}
+    {% if this.page.id == 'news' and is_detail_page %}
+        {% component 'metaList' includePageMeta=false %}
+    {% else %}
+        {% component 'metaList' %}
+    {% endif %}
+    
     {% framework extras %}
     {% styles %}
     {% scripts %}
