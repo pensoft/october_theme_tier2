@@ -106,3 +106,34 @@
     font-weight: bold;
     text-align: center;
 }
+
+.library_banner{
+    font-size: 26px;
+    line-height: 46px;
+    font-family: Gilroy;
+    font-weight: bold;
+    text-align: center;
+
+    .container{
+        padding: 0;
+    }
+
+    a{
+            background: @link-color url(../../../../storage/app/media/cos-white.png) center no-repeat;
+            background-size: 30px;
+            background-position-x: 18px;
+            color: white;
+            text-align: center;
+            padding: 3px 20px 3px 60px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 35px;
+            margin-top: 26px;
+            display: inline-block;
+            &:hover{
+                background: @dark-color url(../../../../storage/app/media/cos-white.png) center no-repeat;
+                background-size: 30px;
+                background-position-x: 18px;
+            }
+    }
+}
