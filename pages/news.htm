@@ -153,7 +153,7 @@ $this['related'] = $related;
                             <h3 class="card-title">{{record.title}}</h3>
                         </div>
 
-                        <div class="body">{{ record.content|length > 450 ? record.content|striptags|slice(0, 450) ~ '...' : record.content|raw  }}</div>
+                        <div class="body">{{ record.content|length > 450 ? record.content|striptags|slice(0, 450)|replace({"&nbsp;": " ", ".": ". "}) ~ '...' : record.content|striptags|replace({"&nbsp;": " ", ".": ". "})  }}</div>
                     </div>
                 </a>
             </div>
