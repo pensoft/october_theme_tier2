@@ -129,6 +129,21 @@ $(document).ready(function() {
 		}
 	});
 
+    /* Handle text and plus/minus changes on toggle **/
+    $('body').on('click', '.insider-border .accordion-toggle', function () {
+        var $accordionContent = $(this).next(".accordion-content");
+        var $toggleText = $(this).find(".member-toggle");
+        var $plusminusSpan = $(this).find(".plusminus span");
+    
+        if ($accordionContent.is(':visible')) {
+            $toggleText.text('Show members');
+            $plusminusSpan.removeClass('minus').addClass('plus');
+        } else {
+            $toggleText.text('Hide members');
+            $plusminusSpan.removeClass('plus').addClass('minus');
+        }
+    });
+    
 
     $('.pilots .accordion-border').click(function(){
         var title = $(this).find(".accordion-toggle .col-xs.start-xs").text();
@@ -144,10 +159,10 @@ $(document).ready(function() {
     $('body').on('click', '#mycomponentpartners .accordion-toggle', function () {
         if ($(this).next(".accordion-content").is(':visible')) {
             $(this).next(".accordion-content").slideUp(300);
-            $(this).children(".plusminus").html('<span>Members</span><span class="plus"></span>');
+            // $(this).children(".plusminus").html('<span>Members</span><span class="plus"></span>');
         } else {
             $(this).next(".accordion-content").slideDown(300);
-            $(this).children(".plusminus").html('<span>Members</span><span class="minus"></span>');
+            // $(this).children(".plusminus").html('<span>Members</span><span class="minus"></span>');
         }
     });
 
@@ -271,7 +286,7 @@ $(document).ready(function() {
 	$('.flyer_image_container img').attr('data-aos', 'fade-up');
 	$('.broshure_and_poster img').attr('data-aos', 'fade-up');
 	$('.card-container').attr('data-aos', 'fade-up');
-	$('.coordinator_image').attr('data-aos', 'fade-up');
+	// $('.coordinator_image').attr('data-aos', 'fade-up');
 
 
 	// $('.news_column, .single-news-item').each(function(){
@@ -303,7 +318,36 @@ $(document).ready(function() {
 
 	$('.see_all_partners_link').hide();
 
+    // Handle the back to top arrow
+    var backToTopButton = $('.toTheTop');
+    var headerImageBarHeight = $('.header-image-bar').outerHeight();
+    var footer = $('.dark-background');
+    
+    function adjustButtonPosition() {
+        var scrollDistance = $(window).scrollTop();
+        var footerPosition = footer.offset().top - $(window).height();
 
+        if (scrollDistance > headerImageBarHeight) {
+            backToTopButton.fadeIn();
+
+            if (scrollDistance < footerPosition) {
+                backToTopButton.removeClass('sticky');
+            } else {
+                backToTopButton.addClass('sticky');
+            }
+        } else {
+            backToTopButton.fadeOut();
+        }
+    }
+
+    adjustButtonPosition();
+
+    $(window).scroll(adjustButtonPosition);
+
+    backToTopButton.click(function() {
+        $('html, body').animate({ scrollTop: 0 }, 'slow');
+        return false;
+    });
 });
 
 function onHashChange(){

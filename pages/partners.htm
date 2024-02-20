@@ -13,7 +13,7 @@ use Pensoft\Cardprofiles\Models\Profiles;
 function onStart(){
 	$this['partners'] =  Partners::where('type', 1)->get();
 	$this['a_partners'] =  Partners::where('type', '!=', 1)->get();
-$this['members'] = Profiles::where('category_id',  1)->get();
+$this['members'] = Profiles::where('category_id',  2)->get();
 
 }
 
@@ -24,7 +24,7 @@ $this['partners'] =  Partners::whereRaw('country_code ILIKE \'%'.post('code').'%
 }
 $this['insider_members'] = new class {
 public function getIM($id) {
-return Profiles::where('partner_id', $id)->where('category_id',  1)->get();
+return Profiles::where('partner_id', $id)->where('category_id',  3)->get();
 }
 };
 }
@@ -36,7 +36,7 @@ $this['partners'] =  Partners::where('id', post('partner_id'))->where('type', 1)
 }
 $this['insider_members'] = new class {
 public function getIM($id) {
-return Profiles::where('partner_id', $id)->where('category_id',  1)->get();
+return Profiles::where('partner_id', $id)->where('category_id',  3)->get();
 }
 };
 }
@@ -71,15 +71,49 @@ return Profiles::where('partner_id', $id)->where('category_id',  1)->get();
                                 </div>
                             </div>
                         </div>
+                        {% if insider_members.getIM(partner.id).count > 0 %}
+                        <div id="accordion-insider-members" class="insider-members-accordion">
+                            <div class="accordion-border insider-border">
+                                <div class="row middle-xs accordion-toggle toggle-insider-members">
+                                    <div class="col-xs start-xs member-toggle">Show members</div>
+                                    <div class="col-xs-2 end-xs plusminus">
+                                        <span class="plus"></span>
+                                    </div>
+                                </div>
+                                <div class="accordion-content insider-partners" style="display: none;">
+                                    <div class="row top-xs">
+                                        {% for profile in insider_members.getIM(partner.id) %}
+                                        <div class="col-xs-12 insider-content">
+                                            <div class="row insider-content-row">
+                                                <div class="col-md-5 col-xs-12 insider_image">
+                                                    {% if profile.avatar %}
+                                                    <img alt="{{ profile.names }}" src="{{profile.avatar.thumb(119,119,{'mode':'crop'})}}">
+                                                    {% else %}
+                                                    <img alt="{{ profile.names }}" src="{{ 'avatar.svg'|media }}" width="119" height="119" class="no-image">
+                                                    {% endif %}
+                                                </div>
+                                                <div class="col-md-7 col-xs-12 insider_info">
+                                                    <h4>{{ profile.names }}</h4>
+                                                    <div class="insider_info_content">{{ profile.content|raw }}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
 
 
                         {% endfor %}
                     </div>
                 </div>
+                <a class="toTheTop" title="Back to the top">&nbsp;</a>
                 <div class="row container partners-map-container">
                     <div id="mycomponentpartners" class="row">
                     </div>
-                    
+
                 </div>
             </div>
             <div class="col-md-5 col-xs-12"></div>

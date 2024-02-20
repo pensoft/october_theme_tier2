@@ -1124,32 +1124,41 @@ now override the 3.3 new styles for modern browsers & apply opacity
 #mycomponentpartners{
     position: relative;
 }
-.scroll_up_arrow{
-  border-radius: 50%;
-  background: @link-color url(../../assets/images/arrow_down-1.svg) center no-repeat;
-  background-size: 30%;
-  width: 50px;
-  height: 50px;
-//   margin-right: 3%;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-//   right: 50%;
-  z-index: 99;
-  display: flex;
-  justify-content: center;
-  vertical-align: middle;
-  transform: rotate(180deg);
-  &:hover{
-      background: @dark-color url(../../assets/images/arrow_down-1.svg) center no-repeat;
-      background-size: 30%;
-      opacity: 0.7;
-      cursor: pointer;
-  }
-  a, a:hover{
-      width: 100%;
-      display: block;
-  }
-  
 
+.toTheTop {
+  background: url("../../assets/images/partners-back-to-top.svg") no-repeat center;
+  background-size: 60px;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  display: none;
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  z-index: 1000;
+  transition: opacity 0.3s;
+
+  &:hover {
+      opacity: 0.7;
+  }
+
+  .breakpoint-laptop-down({
+      background-size: 48px;
+      width: 48px;
+      height: 48px;
+      bottom: 32px;
+      right: 28px;
+  });
+
+  .breakpoint-large-down({
+      background-size: 40px;
+      width: 40px;
+      height: 40px;
+      bottom: 28px;
+      right: 10px;
+  });
+}
+
+.toTheTop.sticky {
+  position: absolute;
 }
