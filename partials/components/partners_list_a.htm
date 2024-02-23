@@ -1,0 +1,9 @@
+{% for partner in a_partners %}
+	<div class="col-xs-12 partner-item">
+		<div class="row">
+            <div class="col-xs-12 partner_title mb-2"><a href="{{partner.instituion_url}}" target="_blank">F1000</a></div>
+		    <div class="col-xs-12 partner_description">{{partner.content|raw}}</div>
+            <div class="col-xs-12 start-xs mb-2"><a class="btn btn-primary" href="{{partner.instituion_url}}" target="_blank">Visit website</a></div>
+        </div>
+	</div>
+{% endfor %}

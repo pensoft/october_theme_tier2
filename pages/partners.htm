@@ -33,6 +33,7 @@ function onSinglePartner(){
 $this['partners'] = [];
 if(post('partner_id')){
 $this['partners'] =  Partners::where('id', post('partner_id'))->where('type', 1)->get();
+$this['a_partners'] =  Partners::where('type', '!=', 1)->get();
 }
 $this['insider_members'] = new class {
 public function getIM($id) {
@@ -60,17 +61,17 @@ return Profiles::where('partner_id', $id)->where('category_id',  3)->get();
                 <div class="row assoc_partners half-a-border-on-top">
                     <div class="col-xs-12">
                         {% for item in a_partners %}
+                        <!-- <a class="parener_logo" onclick="onCustomSinglePartner({{item.id}});" title="{{item.instituion}}"><img class="partner_cover" src="{{item.cover.thumb(116, auto, {'mode':'crop'})}}"></a> -->
+
                         <div class="row partner-item middle-xs aff">
-                            <div class="col-md-3 col-xs-12"><a class="parener_logo" href="{{item.instituion_url}}" target="_blank" title="{{item.instituion}}"><img class="partner_cover" src="{{item.cover.thumb(116, auto, {'mode':'crop'})}}"></a></div>
+                            <div class="col-md-3 col-xs-12"><a class="parener_logo" onclick="onCustomSinglePartnerA({{item.id}});" title="{{item.instituion}}"><img class="partner_cover" src="{{item.cover.thumb(116, auto, {'mode':'crop'})}}"></a></div>
                             <div class="col-md-9 col-xs-12">
-                                <div class="assoc_partner_title partner_title mb-2">
+                                <div class="assoc_partner_title partner_title">
                                     <a href="{{item.instituion_url}}" title="{{item.instituion}}" target="_blank">{{item.instituion}}</a>
-                                </div>
-                                <div class="assoc_partner_info partner_description mb-2">
-                                    {{item.content|raw}}
                                 </div>
                             </div>
                         </div>
+
                         {% if insider_members.getIM(partner.id).count > 0 %}
                         <div id="accordion-insider-members" class="insider-members-accordion">
                             <div class="accordion-border insider-border">

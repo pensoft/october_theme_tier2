@@ -828,6 +828,21 @@ function onCustomSinglePartner(pId) {
         tooltip.classList.remove("active");
     });
 }
+function onCustomSinglePartnerA(pId) {
+    $.request('onSinglePartner', {
+        update: { 'components/partners_list_a': '#mycomponentpartners',
+        },
+        data: {
+            partner_id: pId
+        },
+    }).then(response => {
+        $('html, body').animate({
+            scrollTop: $("#mycomponentpartners").offset().top - 200
+        }, 1000);
+        var tooltip = document.getElementById("tooltip");
+        tooltip.classList.remove("active");
+    });
+}
 
 function scrollUp(){
 	var element = $('#layout-content');
