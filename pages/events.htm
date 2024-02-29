@@ -12,7 +12,6 @@ limit = "null"
 category = "null"
 language = "en"
 redirect_to_detailed_page = "false"
-default_view = "dayGridMonth"
 ==
 <?php
 use Pensoft\Calendar\Models\Entry;
@@ -59,7 +58,11 @@ if($this['entry']['cover_image']){
 
 }
 $this['page_url'] = $this->pageUrl('');
+
 $this['entries'] = Entry::orderBy('start', 'desc')->paginate(20);
+$this['entries_organized'] = Entry::where('identifier', 1)->orderBy('start', 'desc')->paginate(20);
+$this['entries_involved'] = Entry::where('identifier', 2)->orderBy('start', 'desc')->paginate(20);
+$this['entries_relevant'] = Entry::where('identifier', 3)->orderBy('start', 'desc')->paginate(20);
 
 $this['slug'] = $this->param('slug');
 }
@@ -68,15 +71,17 @@ $this['slug'] = $this->param('slug');
 {% if not slug %}
 <div class="container">
     <div class="tabs">
-        <a class="" href="#listView">List view</a>
-        <a class="" href="#calendarView">Calendar view</a>
+        <a class="btn btn-primary" href="#all">All events</a>
+        <a class="btn btn-primary" href="#relevant">Relevant events</a>
+        <a class="btn btn-primary" href="#organized">{{this.theme.site_name}} organized</a>
+        <a class="btn btn-primary" href="#involved">{{this.theme.site_name}} involved</a>
     </div>
 </div>
 <!--tabs content	-->
 <div class="container-fluid bg-secondary">
     <div class="container">
 
-        <div class="row" id="listView">
+        <div class="row" id="all">
             <div class="events_list_container">
                 {% for entry in entries %}
                 {% set url = entry.url ?  entry.url : '/events/' ~ entry.slug %}
@@ -99,8 +104,76 @@ $this['slug'] = $this->param('slug');
             </div>
 
         </div>
-        <div class="row" id="calendarView">
-            {% component 'calendar' %}
+        <div class="row" id="relevant">
+            <div class="events_list_container">
+                {% for entry in entries_relevant %}
+                {% set url = entry.url ?  entry.url : '/events/' ~ entry.slug %}
+
+                <div class="event_list_item">
+                    <div class="row between-xs time_and_date">
+                        <div class="col-md-2 start-md col-xs-12 center-xs">{{entry.event_date}}</div>
+                        <div class="col-md-1 start-md col-xs-12 center-xs">{{entry.start|date('l')}}</div>
+                        <div class="col-md start-md col-xs-12 center-xs"></div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-xs-12"><a class="button" href="{{ url }}" target="_blank">{{entry.title}}</a></div>
+                    </div>
+                </div>
+
+                {% endfor %}
+            </div>
+            <div class="row container">
+                {{ entries.fragment('listView').render|raw }}
+            </div>
+
+        </div>
+
+        <div class="row" id="organized">
+            <div class="events_list_container">
+                {% for entry in entries_organized %}
+                {% set url = entry.url ?  entry.url : '/events/' ~ entry.slug %}
+
+                <div class="event_list_item">
+                    <div class="row between-xs time_and_date">
+                        <div class="col-md-2 start-md col-xs-12 center-xs">{{entry.event_date}}</div>
+                        <div class="col-md-1 start-md col-xs-12 center-xs">{{entry.start|date('l')}}</div>
+                        <div class="col-md start-md col-xs-12 center-xs"></div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-xs-12"><a class="button" href="{{ url }}" target="_blank">{{entry.title}}</a></div>
+                    </div>
+                </div>
+
+                {% endfor %}
+            </div>
+            <div class="row container">
+                {{ entries.fragment('listView').render|raw }}
+            </div>
+
+        </div>
+
+        <div class="row" id="involved">
+            <div class="events_list_container">
+                {% for entry in entries_involved %}
+                {% set url = entry.url ?  entry.url : '/events/' ~ entry.slug %}
+
+                <div class="event_list_item">
+                    <div class="row between-xs time_and_date">
+                        <div class="col-md-2 start-md col-xs-12 center-xs">{{entry.event_date}}</div>
+                        <div class="col-md-1 start-md col-xs-12 center-xs">{{entry.start|date('l')}}</div>
+                        <div class="col-md start-md col-xs-12 center-xs"></div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-xs-12"><a class="button" href="{{ url }}" target="_blank">{{entry.title}}</a></div>
+                    </div>
+                </div>
+
+                {% endfor %}
+            </div>
+            <div class="row container">
+                {{ entries.fragment('listView').render|raw }}
+            </div>
+
         </div>
     </div>
 

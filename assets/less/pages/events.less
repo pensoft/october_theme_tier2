@@ -131,8 +131,15 @@
         width: fit-content;
         font-weight: bold;
         cursor: pointer;
-        color: @link-color;
         padding-left: 40px;
+
+        &:not(.active){
+            &:hover{
+                opacity: 0.7;
+            }
+        }
+
+
         .breakpoint-small-down({
             margin-left: 0px;
             width: 100%;
@@ -140,18 +147,16 @@
         });
 
         &.active{
-            opacity: 0.6;
-            display: none;
         }
 
-        &:first-of-type{
-            background: url("../../assets/images/list.svg") left no-repeat;
-            background-size: 23px 23px;
-        }
-        &:last-of-type{
-            background: url("../../assets/images/calendar.svg") left no-repeat;
-            background-size: 27px 23px;
-        }
+        //&:first-of-type{
+        //    background: url("../../assets/images/list.svg") left no-repeat;
+        //    background-size: 23px 23px;
+        //}
+        //&:last-of-type{
+        //    background: url("../../assets/images/calendar.svg") left no-repeat;
+        //    background-size: 27px 23px;
+        //}
     }
 
 }

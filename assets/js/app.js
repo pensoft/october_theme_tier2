@@ -134,7 +134,7 @@ $(document).ready(function() {
         var $accordionContent = $(this).next(".accordion-content");
         var $toggleText = $(this).find(".member-toggle");
         var $plusminusSpan = $(this).find(".plusminus span");
-    
+
         if ($accordionContent.is(':visible')) {
             $toggleText.text('Show members');
             $plusminusSpan.removeClass('minus').addClass('plus');
@@ -143,7 +143,7 @@ $(document).ready(function() {
             $plusminusSpan.removeClass('plus').addClass('minus');
         }
     });
-    
+
 
     $('.pilots .accordion-border').click(function(){
         var title = $(this).find(".accordion-toggle .col-xs.start-xs").text();
@@ -326,7 +326,7 @@ $(document).ready(function() {
     var backToTopButton = $('.toTheTop');
     var headerImageBarHeight = $('.header-image-bar').outerHeight();
     var footer = $('.dark-background');
-    
+
     function adjustButtonPosition() {
         var scrollDistance = $(window).scrollTop();
         var footerPosition = footer.offset().top - $(window).height();
