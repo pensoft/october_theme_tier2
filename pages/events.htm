@@ -13,10 +13,6 @@ category = "null"
 language = "en"
 redirect_to_detailed_page = "false"
 default_view = "dayGridMonth"
-
-[session]
-security = "user"
-redirect = "home"
 ==
 <?php
 use Pensoft\Calendar\Models\Entry;
@@ -69,7 +65,6 @@ $this['slug'] = $this->param('slug');
 }
 ?>
 ==
-{% component 'session' %}
 {% if not slug %}
 <div class="container">
     <div class="tabs">

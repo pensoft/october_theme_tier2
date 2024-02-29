@@ -189,6 +189,10 @@ $(document).ready(function() {
             $active.addClass('active');
         }
 
+         if($(this).parent().parent().hasClass('events')){
+            $active.addClass('active');
+        }
+
 		$content = $($active[0].hash);
 
 		// Hide the remaining content
