@@ -66,9 +66,9 @@ $this['entries_involved'] = Entry::where('end', '>=', Carbon::now())->where('ide
 $this['entries_relevant'] = Entry::where('end', '>=', Carbon::now())->where('identifier', 3)->orderBy('start', 'asc')->paginate(20);
 
 $this['past_entries'] = Entry::where('end', '<', Carbon::now())->orderBy('start', 'desc')->get();
-$this['past_entries_organized'] = Entry::where('end', '<', Carbon::now())->where('identifier', 1)->orderBy('start', 'desc');
-$this['past_entries_involved'] = Entry::where('end', '<', Carbon::now())->where('identifier', 2)->orderBy('start', 'desc');
-$this['past_entries_relevant'] = Entry::where('end', '<', Carbon::now())->where('identifier', 3)->orderBy('start', 'desc');
+$this['past_entries_organized'] = Entry::where('end', '<', Carbon::now())->where('identifier', 1)->orderBy('start', 'desc')->get();
+$this['past_entries_involved'] = Entry::where('end', '<', Carbon::now())->where('identifier', 2)->orderBy('start', 'desc')->get();
+$this['past_entries_relevant'] = Entry::where('end', '<', Carbon::now())->where('identifier', 3)->orderBy('start', 'desc')->get();
 
 $this['slug'] = $this->param('slug');
 }
