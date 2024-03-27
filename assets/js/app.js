@@ -175,7 +175,7 @@ $(document).ready(function() {
 
 	var count = $("h1").text().length;
 
-	$('.tabs').each(function(){
+	$('.events_tabs').each(function(){
 		// For each set of tabs, we want to keep track of
 		// which tab is active and its associated content
 		var $active, $content, $links = $(this).find('a');
@@ -431,13 +431,13 @@ function appendSearchAndSocialMedia(){
 	menu.find('>ul').append(liSearch).append(liSocial);
 }
 
-function redirectAndRefresh(url){
-	$(".tabs a").each(function() {
-		this.href = window.location.hash;
-	});
-	window.open(url, '_blank');
-	location.reload();
-}
+// function redirectAndRefresh(url){
+// 	$(".tabs a").each(function() {
+// 		this.href = window.location.hash;
+// 	});
+// 	window.open(url, '_blank');
+// 	location.reload();
+// }
 
 function isBreakpointLarge() {
     return window.innerWidth <= 991;
