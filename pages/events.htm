@@ -12,6 +12,7 @@ limit = "null"
 category = "null"
 language = "en"
 redirect_to_detailed_page = "false"
+default_view = "dayGridMonth"
 ==
 <?php
 use Pensoft\Calendar\Models\Entry;
@@ -76,7 +77,7 @@ $this['slug'] = $this->param('slug');
 ==
 {% if not slug %}
 <div class="container">
-    <div class="tabs">
+    <div class="tabs events_tabs">
         <a class="btn btn-primary" href="#all">All events</a>
         <a class="btn btn-primary" href="#relevant">Relevant events</a>
         <a class="btn btn-primary" href="#organized">{{this.theme.site_name}} organized</a>
