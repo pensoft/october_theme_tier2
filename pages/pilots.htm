@@ -1,40 +1,105 @@
 url = "/pilots"
 layout = "default"
-title = "Demonstration sites"
-header_image = 'demonstration-sites.jpg'
+title = "Pilots"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+header_image = "about.jpg"
+
 
 [siteSearchInclude]
 
-[jumbotron]
-jumbotron = "pilots-image"
-background = "#ffffff"
+[jumbotron pilots-intro]
+jumbotron = "pilots-intro"
+title = 0
+background = "transperant"
 templates = "template1"
 description_limit = 0
 
-[accordion]
-maxItems = 10
-accordion = 2
-elementId = "structure"
-active = 0
-collapsible = "false"
-heightStyle = "auto"
-iconsHeader = "ui-icon-triangle-1-e"
-iconsHeaderActive = "ui-icon-triangle-1-s"
-templates = "template4"
+==
+<?php
+use Pensoft\Pilots\Models\Pilot;
 
+function onStart()
+{
+    $this['pilots'] = Pilot::where('published', 'true')->orderBy('sort_order')->orderBy('title', 'asc')->get();
+}
 
+?>
 ==
 {% component 'siteSearchInclude' %}
-<div class="container pilots_background_container">
-    <div class="row top-xs">
-        <div class="col-md-6 col-xs-12">
-            {% component 'accordion' %}
-        </div>
-        <div class="col-md-6 col-xs-12">
-            <div class="pilots_svg_map_container">
-                <span class="tooltiptext" id="tooltip">Bulgaria</span>
-                {% partial 'components/pilots_map' %}
+
+<div class="container-fluid pilots">
+
+    <div class="pilots-intro">
+        {% component 'pilots-intro' %}
+    </div>
+    
+    <div class="container">
+        <div class="row pilot-row">
+            {% for pilot in pilots %}
+            <div class="col-xs-12 pilot-item">
+                <div class="row pilot-content">
+                    {% if pilot.title %}
+                    <div class="col-xs-12 pilot-header mb-1">{{ pilot.title }}</div>
+                    {% endif %}
+                    {% if pilot.intro %}
+                    <div class="col-xs-12 intro mb-1">{{ pilot.intro | raw }}</div>
+                    {% endif %}
+                    {% if pilot.name %}
+                    <div class="col-xs-12 name mb-1"><span class="subhead">Name: </span>{{ pilot.name }}</div>
+                    {% endif %}
+                    {% if pilot.stakeholders %}
+                    <div class="col-xs-12 stakeholders">
+                        <span class="subhead">Stakeholders: </span> 
+                        {{pilot.stakeholders | raw}}
+                    </div>
+                    {% endif %}
+                    <div class="col-xs-12 timeline-d mb-1">
+                        <span class="subhead">Timeline: </span>
+                        {% if pilot.timeline_start %}
+                        {{ pilot.timeline_start|date('F j') }}
+                        {% endif %}
+                        -
+                        {% if pilot.timeline_end %}
+                        {{ pilot.timeline_end|date('F j') }}
+                        {% endif %}
+                    </div>                    
+                    {% if pilot.objectives %}
+                    <div class="col-xs-12 objectives mb-1">
+                        <span class="subhead">Objectives: </span> 
+                        {{ pilot.objectives | raw }}
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="pilot-seperator mb-1"></div>
+                <div class="row pilot-contact between-xs">
+                    <div class="col-md-8 col-xs-12">
+                        {% if pilot.contacts %}
+                        <div class="row">
+                            <span class="subhead mr-1">Contact info: </span>
+                            {% for contact in pilot.contacts %}
+                            <div class="pilot-contact-info">
+                                {% if contact.email %}
+                                <a class="pilot-contact-name" href="mailto:{{ contact.email }}">
+                                    {{ contact.names }}
+                                </a>
+                                {% else %}
+                                <a class="pilot-contact-name">{{ contact.names }}</a>
+                                {% endif %}
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% if pilot.link_to_news %}
+                    <div class="col-md-4 col-xs-12 end-xs">
+                        <a href="{{pilot.link_to_news}}" class="btn btn-primary">Link to news</a>
+                    </div>
+                    {% endif %}
+                </div>
             </div>
+            {% endfor %}
         </div>
     </div>
 </div>
