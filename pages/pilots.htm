@@ -19,6 +19,7 @@ description_limit = 0
 ==
 <?php
 use Pensoft\Pilots\Models\Pilot;
+use Pensoft\Partners\Models\Partners;
 
 function onStart()
 {
@@ -44,30 +45,28 @@ function onStart()
                     <div class="col-xs-12 pilot-header mb-1">{{ pilot.title }}</div>
                     {% endif %}
                     {% if pilot.intro %}
-                    <div class="col-xs-12 intro mb-1">{{ pilot.intro | raw }}</div>
+                    <div class="col-xs-12 intro">{{ pilot.intro | raw }}</div>
                     {% endif %}
                     {% if pilot.name %}
                     <div class="col-xs-12 name mb-1"><span class="subhead">Name: </span>{{ pilot.name }}</div>
                     {% endif %}
                     {% if pilot.stakeholders %}
-                    <div class="col-xs-12 stakeholders">
-                        <span class="subhead">Stakeholders: </span> 
+                    <div class="col-xs-12 stakeholders mb-1">
                         {{pilot.stakeholders | raw}}
                     </div>
                     {% endif %}
                     <div class="col-xs-12 timeline-d mb-1">
                         <span class="subhead">Timeline: </span>
                         {% if pilot.timeline_start %}
-                        {{ pilot.timeline_start|date('F j') }}
+                        {{ pilot.timeline_start|date('F Y') }}
                         {% endif %}
                         -
                         {% if pilot.timeline_end %}
-                        {{ pilot.timeline_end|date('F j') }}
+                        {{ pilot.timeline_end|date('F Y') }}
                         {% endif %}
                     </div>                    
                     {% if pilot.objectives %}
                     <div class="col-xs-12 objectives mb-1">
-                        <span class="subhead">Objectives: </span> 
                         {{ pilot.objectives | raw }}
                     </div>
                     {% endif %}
@@ -76,19 +75,22 @@ function onStart()
                 <div class="row pilot-contact between-xs">
                     <div class="col-md-8 col-xs-12">
                         {% if pilot.contacts %}
-                        <div class="row">
+                        <div class="row contact-row">
                             <span class="subhead mr-1">Contact info: </span>
                             {% for contact in pilot.contacts %}
                             <div class="pilot-contact-info">
                                 {% if contact.email %}
                                 <a class="pilot-contact-name" href="mailto:{{ contact.email }}">
-                                    {{ contact.names }}
+                                    {{ contact.names }} <span>{% if contact.partner.instituion %} ({{ contact.partner.instituion }}) {% endif %}</span>
                                 </a>
                                 {% else %}
-                                <a class="pilot-contact-name">{{ contact.names }}</a>
+                                <a class="pilot-contact-name">
+                                    {{ contact.names }} <span>{% if contact.partner.instituion %} ({{ contact.partner.instituion }}) {% endif %}</span>
+                                </a>
                                 {% endif %}
                             </div>
-                            {% endfor %}
+                        {% endfor %}
+                        
                         </div>
                         {% endif %}
                     </div>
