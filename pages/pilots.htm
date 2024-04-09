@@ -1,4 +1,4 @@
-url = "/pilots"
+url = "/pilots/:code?|[a-zA-Z\-0-9]+"
 layout = "default"
 title = "Pilots"
 is_hidden = 0
@@ -24,6 +24,13 @@ use Pensoft\Partners\Models\Partners;
 function onStart()
 {
     $this['pilots'] = Pilot::where('published', 'true')->orderBy('sort_order')->orderBy('title', 'asc')->get();
+
+    $code = $this->param('code');
+    
+    if ($code && ctype_digit($code)){
+        $this['pilots'] = Pilot::where('id', $this->param('code'))->get();
+    }
+
 }
 
 ?>
@@ -36,7 +43,7 @@ function onStart()
         {% component 'pilots-intro' %}
     </div>
     
-    <div class="container">
+    <div class="container" style="padding-top: 0;">
         <div class="row pilot-row">
             {% for pilot in pilots %}
             <div class="col-xs-12 pilot-item">
