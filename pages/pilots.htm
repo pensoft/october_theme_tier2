@@ -6,7 +6,6 @@ robot_index = "index"
 robot_follow = "follow"
 header_image = "about.jpg"
 
-
 [siteSearchInclude]
 
 [jumbotron pilots-intro]
@@ -15,7 +14,6 @@ title = 0
 background = "transperant"
 templates = "template1"
 description_limit = 0
-
 ==
 <?php
 use Pensoft\Pilots\Models\Pilot;
@@ -25,7 +23,6 @@ function onStart()
 {
     $this['pilots'] = Pilot::where('published', 'true')->orderBy('sort_order')->orderBy('title', 'asc')->get();
 }
-
 ?>
 ==
 {% component 'siteSearchInclude' %}
@@ -36,7 +33,7 @@ function onStart()
         {% component 'pilots-intro' %}
     </div>
     
-    <div class="container">
+    <div class="container" style="padding-top: 0;">
         <div class="row pilot-row">
             {% for pilot in pilots %}
             <div class="col-xs-12 pilot-item">
@@ -81,11 +78,11 @@ function onStart()
                             <div class="pilot-contact-info">
                                 {% if contact.email %}
                                 <a class="pilot-contact-name" href="mailto:{{ contact.email }}">
-                                    {{ contact.names }} <span>{% if contact.partner.instituion %} ({{ contact.partner.instituion }}) {% endif %}</span>
+                                    {{ contact.names }} &nbsp; <span>{% if contact.partner.instituion %} ({{ contact.partner.instituion }}) {% endif %}</span>
                                 </a>
                                 {% else %}
                                 <a class="pilot-contact-name">
-                                    {{ contact.names }} <span>{% if contact.partner.instituion %} ({{ contact.partner.instituion }}) {% endif %}</span>
+                                    {{ contact.names }} &nbsp; <span>{% if contact.partner.instituion %} ({{ contact.partner.instituion }}) {% endif %}</span>
                                 </a>
                                 {% endif %}
                             </div>

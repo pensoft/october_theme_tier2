@@ -47,10 +47,10 @@ return Redirect::to('/media-center/other');
         {% for record in records %}
         {# Use spaceless tag to remove spaces inside the A tag. #}
         {% spaceless %}
-        <div class="col-md-3 col-xs-12 mt-1">
+        <div class="col-md-3 col-xs-12 mb-4">
             <div class="text-center">
-                <span class="card_title">{{record.name}}</span><br>
-                <span class="card_image_container" style="background: url({{record.image.thumb(220, 220,{'mode':'crop'})}}) center center no-repeat;" title="{{record.name}}"></span>
+                <span class="card_title" style="min-height: unset;">{{record.name}}</span><br>
+                <span class="card_image_container" style="background: url({{record.image.thumb(220, 220,{'mode':'crop'})}}) center center no-repeat; margin: 0 auto 27px auto!important;" title="{{record.name}}"></span>
                 <br><a href="{{ record.file.path }}#{{record.file.file_name}}" target="_blank" title="{{record.name}}" class="btn btn-primary">Download</a>
             </div>
         </div>
