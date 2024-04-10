@@ -6,7 +6,6 @@ robot_index = "index"
 robot_follow = "follow"
 header_image = "about.jpg"
 
-
 [siteSearchInclude]
 
 [jumbotron pilots-intro]
@@ -15,7 +14,6 @@ title = 0
 background = "transperant"
 templates = "template1"
 description_limit = 0
-
 ==
 <?php
 use Pensoft\Pilots\Models\Pilot;
@@ -31,7 +29,6 @@ function onStart()
         $this['pilots'] = Pilot::where('pilot_number', $code)->get();
     }
 }
-
 ?>
 ==
 {% component 'siteSearchInclude' %}
@@ -87,11 +84,11 @@ function onStart()
                             <div class="pilot-contact-info">
                                 {% if contact.email %}
                                 <a class="pilot-contact-name" href="mailto:{{ contact.email }}">
-                                    {{ contact.names }} <span>{% if contact.partner.instituion %} ({{ contact.partner.instituion }}) {% endif %}</span>
+                                    {{ contact.names }} &nbsp; <span>{% if contact.partner.instituion %} ({{ contact.partner.instituion }}) {% endif %}</span>
                                 </a>
                                 {% else %}
                                 <a class="pilot-contact-name">
-                                    {{ contact.names }} <span>{% if contact.partner.instituion %} ({{ contact.partner.instituion }}) {% endif %}</span>
+                                    {{ contact.names }} &nbsp; <span>{% if contact.partner.instituion %} ({{ contact.partner.instituion }}) {% endif %}</span>
                                 </a>
                                 {% endif %}
                             </div>
