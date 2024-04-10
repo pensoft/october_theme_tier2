@@ -12,8 +12,8 @@ use Pensoft\Cardprofiles\Models\Profiles;
 
 function onStart(){
 	$this['partners'] =  Partners::where('type', 1)->get();
-	$this['a_partners'] =  Partners::where('type', '!=', 1)->get();
-$this['members'] = Profiles::where('category_id',  2)->get();
+	$this['a_partners'] =  Partners::where('type', 2)->get();
+$this['members'] = Profiles::where('category_id', 2)->get();
 
 }
 
@@ -33,7 +33,7 @@ function onSinglePartner(){
 $this['partners'] = [];
 if(post('partner_id')){
 $this['partners'] =  Partners::where('id', post('partner_id'))->where('type', 1)->get();
-$this['a_partners'] =  Partners::where('type', '!=', 1)->get();
+$this['a_partners'] =  Partners::where('type',  2)->get();
 }
 $this['insider_members'] = new class {
 public function getIM($id) {
