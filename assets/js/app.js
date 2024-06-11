@@ -175,7 +175,7 @@ $(document).ready(function() {
 
 	var count = $("h1").text().length;
 
-	$('.events_tabs').each(function(){
+	$('.events_tabs, .videos .tabs').each(function(){
 		// For each set of tabs, we want to keep track of
 		// which tab is active and its associated content
 		var $active, $content, $links = $(this).find('a');
