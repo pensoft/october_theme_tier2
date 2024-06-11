@@ -7,6 +7,7 @@ robot_follow = "follow"
 header_image = "about.jpg"
 
 [siteSearchInclude]
+
 ==
 <?php
 use Pensoft\Cardprofiles\Models\Profiles;
@@ -16,6 +17,7 @@ function onStart(){
 }
 ?>
 ==
+
 {% component 'siteSearchInclude' %}
 
 <div class="container">
@@ -25,7 +27,7 @@ function onStart(){
 				<div class="contact_info row">
 					<div class="col-md-5 col-xs-12 coordinator_image aos-init aos-animate" data-aos="fade-up">
                         {% if profile.avatar %}
-                        <img src="{{profile.avatar.thumb(197, 197, {'mode':'crop'})}}" class="fr-fic fr-dii">
+                        <img src="{{profile.avatar|crop_image}}" class="fr-fic fr-dii">
                         {% else %}
                         <img alt="{{ profile.names }}" src="{{ 'avatar.svg'|media }}" class="no-image">
                         {% endif %}

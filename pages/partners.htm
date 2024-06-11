@@ -86,7 +86,7 @@ return Profiles::where('partner_id', $id)->where('category_id',  3)->get();
                                             <div class="row insider-content-row">
                                                 <div class="col-md-5 col-xs-12 insider_image">
                                                     {% if profile.avatar %}
-                                                    <img alt="{{ profile.names }}" src="{{profile.avatar.thumb(119,119,{'mode':'crop'})}}">
+                                                    <img alt="{{ profile.names }}" src="{{profile.avatar|crop_image}}">
                                                     {% else %}
                                                     <img alt="{{ profile.names }}" src="{{ 'avatar.svg'|media }}" width="119" height="119" class="no-image">
                                                     {% endif %}
