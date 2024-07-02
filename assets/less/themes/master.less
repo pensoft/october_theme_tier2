@@ -1117,6 +1117,52 @@ now override the 3.3 new styles for modern browsers & apply opacity
     }
 }
 
+.category-tabs-container{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  margin-left: 10px;
+  a{
+      position: relative;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 10px 30px;
+      color: #ffffff;
+      background-color: #33dbce;
+      border: 1px solid #33dbce;
+      border-radius: 50px;
+
+      &.active, &:hover{
+        background-color: #0e1123;
+        border-color: #0e1123;
+        color: @white-color;
+      }
+
+      &:not(:last-child){
+          margin-right: 20px;
+      }
+
+      .breakpoint-large-down({
+          margin-bottom: 18px;
+      });
+
+  }
+  .category-tabs{
+      .breakpoint-large-down({
+          display: flex;
+          align-items: center;
+          justify-content: center;
+      });            
+  }
+  .breakpoint-large-down({
+      margin-left: unset;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+  });     
+}
+
 .container:has(.highlights-news){
     padding-top: 0!important;
 }
