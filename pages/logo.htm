@@ -1,6 +1,6 @@
-title = "Logo"
-url = "/media-center/logo"
+url = "/media-center/brand-kit"
 layout = "default"
+title = "Brand kit"
 is_hidden = 0
 robot_index = "index"
 robot_follow = "follow"
@@ -59,45 +59,37 @@ return Redirect::to('/media-center/logo');
 	{% set detailsKeyColumn = mediaLogosList.detailsKeyColumn %}
 	{% set detailsUrlParameter = mediaLogosList.detailsUrlParameter %}
 
+    <div class="row card-container-row mb-4 start-xs">
 	{% for record in records %}
 	{# Use spaceless tag to remove spaces inside the A tag. #}
 	{% spaceless %}
 	{% if record.logo_image %}
-
-
-	<div class="row card-container-row mb-4 start-xs">
-		<div class="col-xs-12">
-			<p><img src="{{record.logo_image.path}}" title="{{record.name}}" style="max-width: 250px;"></p>
-		</div>
-		{% if record.file_jpg %}
-		<div class="col-md-2 col-xs-12">
-			<div class="text-center">
-				<span class="card_title">JPG, {{record.file_jpg.size}}</span><br>
-				<br><a href="{{ ''| page }}?{{queries}}&download={{record.file_jpg.id}}&file_name={{record.file_jpg.file_name|replace({' ': '_'})}}" title="Logo pack" class="btn btn-primary">Download</a>
-			</div>
-		</div>
-		{% endif %}
-		{% if record.file_png %}
-		<div class="col-md-2 col-xs-12">
-			<div class="text-center">
-				<span class="card_title">PNG, {{record.file_png.size}}</span><br>
-				<br><a href="{{ ''| page }}?{{queries}}&download={{record.file_png.id}}&file_name={{record.file_png.file_name|replace({' ': '_'})}}" title="Logo pack" class="btn btn-primary">Download</a>
-			</div>
-		</div>
-		{% endif %}
-		{% if record.file_eps %}
-		<div class="col-md-2 col-xs-12">
-			<div class="text-center">
-				<span class="card_title">SVG, {{record.file_eps.size}}</span><br>
-				<br><a href="{{ ''| page }}?{{queries}}&download={{record.file_eps.id}}&file_name={{record.file_eps.file_name|replace({' ': '_'})}}" title="Logo pack" class="btn btn-primary">Download</a>
-			</div>
-		</div>
-		{% endif %}
-	</div>
+		<div class="col-md-3 col-xs-12 center-xs mb-4">
+			<p class="logo_container"><img src="{{record.logo_image.path}}" title="{{record.name}}" style="height: 250px; object-fit: contain;"></p>
+            <div class="col-xs-12">
+                <div class="text-center">
+                    <b>Download {{record.name}}</b> <br><br>
+                    {% if record.file_jpg %}
+                        <a href="{{ ''| page }}?{{queries}}&download={{record.file_jpg.id}}&file_name={{record.file_jpg.file_name|replace({' ': '_'})}}" title="Brand kit" class="btn btn-primary"><i class="pr p-download"></i>  JPG</a> &nbsp;
+                    {% endif %}
+                    {% if record.file_png %}
+                        <a href="{{ ''| page }}?{{queries}}&download={{record.file_png.id}}&file_name={{record.file_png.file_name|replace({' ': '_'})}}" title="Brand kit" class="btn btn-primary"><i class="pr p-download"></i>  PNG</a> &nbsp;
+                    {% endif %}
+                    {% if record.file_eps %}
+                        <a href="{{ ''| page }}?{{queries}}&download={{record.file_eps.id}}&file_name={{record.file_eps.file_name|replace({' ': '_'})}}" title="Brand kit" class="btn btn-primary"><i class="pr p-download"></i>  SVG</a>
+                    {% endif %}
+					
+                    {% if record.file_pdf %}
+                        <a href="{{record.file_pdf.path}}" target="_blank" title="Brand kit" class="btn btn-primary"><i class="pr p-download"></i>  PDF</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
 	{% endif %}
 
 	{% endspaceless %}
 	{% else %}
 	{{ noRecordsMessage }}
 	{% endfor %}
+    </div>
 </div>

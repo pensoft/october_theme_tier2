@@ -80,7 +80,7 @@ $this['slug'] = $this->param('slug');
     <div class="tabs events_tabs">
         <a class="btn btn-primary" href="#all">All events</a>
         <a class="btn btn-primary" href="#relevant">Relevant events</a>
-        <a class="btn btn-primary" href="#organized">{{this.theme.site_name}} organized</a>
+        <a class="btn btn-primary" href="#organised">{{this.theme.site_name}} organised</a>
         <a class="btn btn-primary" href="#involved">{{this.theme.site_name}} involved</a>
     </div>
 </div>
@@ -176,7 +176,7 @@ $this['slug'] = $this->param('slug');
 
         </div>
 
-        <div class="row" id="organized">
+        <div class="row" id="organised">
             <div class="col-xs-12 events_list_container">
                 {% for entry in entries_organized %}
                 {% set url = entry.url ?  entry.url : '/events/' ~ entry.slug %}
@@ -199,7 +199,7 @@ $this['slug'] = $this->param('slug');
             </div>
 
             <div class="col-xs-12">
-                <h2>Past TIER2 organized events</h2>
+                <h2>Past TIER2 organised events</h2>
                 <div class="events_list_container">
                     {% for entry in past_entries_organized %}
                     {% set url = entry.url ?  entry.url : '/events/' ~ entry.slug %}
@@ -319,3 +319,5 @@ $this['slug'] = $this->param('slug');
 {% endif %}
 
 {% endif %}
+
+<a class="toTheTop" title="Back to the top">&nbsp;</a>

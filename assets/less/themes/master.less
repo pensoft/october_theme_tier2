@@ -683,6 +683,17 @@ footer .align-items-center{
   });
 }
 
+.card.profile {
+    width: 350px !important;
+    min-height: 660px !important;
+    margin-bottom: 60px !important;
+    .card-img-top{
+        height: 400px !important;
+    }
+    .breakpoint-large-down({
+        width: 280px !important;
+    });
+}
 
 .contact{
   .split{
@@ -981,11 +992,17 @@ now override the 3.3 new styles for modern browsers & apply opacity
 
     p{
         padding-left: 133px;
+        .breakpoint-large-down({
+            padding-left: 0;
+        });
     }
 
     ul{
         padding-left: 133px;
         list-style-type: none;
+        .breakpoint-large-down({
+            padding-left: 0;
+        });
         li{
             display: flex;
             align-items: center;
@@ -1025,6 +1042,10 @@ now override the 3.3 new styles for modern browsers & apply opacity
             line-height: 59px;
             font-size: 46px;
             font-weight: bold;
+            left: 0px;
+            padding-left: 0px;
+            background-position-y: unset;
+            padding-top: 85px;
         });
     }
 
@@ -1034,6 +1055,9 @@ now override the 3.3 new styles for modern browsers & apply opacity
         align-items: center;
         margin-top: 50px;
         flex-wrap: nowrap;
+        .breakpoint-large-down({
+            flex-wrap: wrap;
+        });
 
       .profile-item{
         max-width: 49%!important;
