@@ -8,7 +8,7 @@ header_image = "about.jpg"
 
 [siteSearchInclude]
 
-[jumbotron pilots-intro]
+[jumbotron pilots_intro]
 jumbotron = "pilots-intro"
 title = 0
 background = "transperant"
@@ -36,7 +36,7 @@ function onStart()
 <div class="container-fluid pilots">
 
     <div class="pilots-intro">
-        {% component 'pilots-intro' %}
+        {% component 'pilots_intro' %}
     </div>
     
     <div class="container">
@@ -102,6 +102,12 @@ function onStart()
                     {% if pilot.link_to_news %}
                     <div class="col-md-4 col-xs-12 end-xs">
                         <a href="{{pilot.link_to_news}}" class="btn btn-primary">Find out more</a>
+                        {% if pilot.id == 9 %}
+                        <a href="https://publishers.fairassist.org/" target="_blank" class="btn btn-primary">Handbook</a>
+                        {% endif %}
+                        {% if pilot.id == 4 %}
+                        <a href="https://lab.hypatia-comp.athenarc.gr/" target="_blank" class="btn btn-primary">Hypatia lab</a>
+                        {% endif %}
                     </div>
                     {% endif %}
                 </div>
