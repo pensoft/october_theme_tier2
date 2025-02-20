@@ -51,17 +51,38 @@
     &.small {
       .font-size(0.80);
     }
-    &.normal {
+    &.normal { //header
       .font-size(1.2);
       &.p-twitter {
         margin-right: 5px
       }
+      &.p-bluesky {
+          .font-size(1.1);
+        margin-right: 5px;
+          margin-left: 5px;
+      }
+      &.p-threads {
+          .font-size(1.1);
+          margin-right: 5px;
+          margin-left: 5px;
+      }
     }
-    &.big {
+    &.big { //footer
       .font-size(1.8);
       &.p-twitter {
         .font-size(1.3);
         margin-top: 5px;
+      }
+      &.p-bluesky {
+        .font-size(1.2);
+        margin-top: 7px;
+      }
+      &.p-threads {
+        .font-size(1.2);
+        margin-top: 7px;
+      }
+      &.p-youtube {
+        margin-left: 6px!important;
       }
     }
     &.middle {
@@ -258,8 +279,16 @@
     content: "\eaf1";
 }
 .p-twitter:before {
-  font-family: 'x-icon';
-  content: "\e901";
+    font-family: 'x-icon';
+    content: "\e902";
+}
+.p-bluesky:before {
+    font-family: 'x-icon';
+    content: "\e900";
+}
+.p-threads:before {
+    font-family: 'x-icon';
+    content: "\e904";
 }
 .p-youtube:before {
     content: "\eaf3";
