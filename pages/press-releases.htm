@@ -1,6 +1,6 @@
 url = "/media-center/press-releases"
 layout = "default"
-title = "Media center"
+title = "Press releases"
 is_hidden = 0
 robot_index = "index"
 robot_follow = "follow"
@@ -20,7 +20,7 @@ pageNumber = "{{ :page }}"
 use Pensoft\Media\Models\Pressreleases;
 
 function onStart(){
-	$this['mediaPressreleasesList'] =  Pressreleases::get();
+	$this['mediaPressreleasesList'] =  Pressreleases::orderby('date', 'desc')->get();
 }
 ?>
 ==
@@ -37,7 +37,7 @@ function onStart(){
 		{% for record in records %}
 		{# Use spaceless tag to remove spaces inside the A tag. #}
 		{% spaceless %}
-		<div class="col-xs">
+		<div class="col-md-6 col-xs-12">
 			<div class="press-relies-item">
 				<span class="card_title">{{record.name}}</span><br>
 				<span class="date"> {{record.date |date('F Y')}}</span>
