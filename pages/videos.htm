@@ -51,244 +51,370 @@ return Redirect::to('/media-center/videos');
 }
 ?>
 ==
-<div class="container">
-    <div class="tabs">
-        <a class="" href="#allVideos">All videos</a>
-        <a class="" href="#projectVideos">TIER2 videos</a>
-        <a class="" href="#relevantVideos">Relevant videos</a>
-    </div>
+<main id="main-content" role="main">
+    <section class="container" aria-labelledby="videos-heading">
+        <h1 id="videos-heading" class="sr-only">Videos</h1>
+        <nav class="tabs" role="tablist" aria-label="Video categories">
+            <a href="#allVideos" role="tab" aria-selected="true" aria-controls="allVideos">All videos</a>
+            <a href="#projectVideos" role="tab" aria-selected="false" aria-controls="projectVideos">TIER2 videos</a>
+            <a href="#relevantVideos" role="tab" aria-selected="false" aria-controls="relevantVideos">Relevant videos</a>
+        </nav>
 
-    <div class="row" id="allVideos">
-        {% set records = mediaVideosList %}
+        <div class="row" id="allVideos" role="tabpanel" aria-labelledby="all-videos-heading">
+            <h2 id="all-videos-heading" class="sr-only">All Videos</h2>
+            {% set records = mediaVideosList %}
 
-        {% for record in records %}
-        {# Use spaceless tag to remove spaces inside the A tag. #}
-        {% spaceless %}
-        <div class="col-xs-12 col-md-6" id="accordion-documents">
-            <p style="min-height: 50px; max-width: 570px">{{record.name}}</p>
-            {% if record.file %}
-            <video controls="" height="360px" width="570px"><source src="{{record.file.path}}" type="video/mp4"></video>
+            {% for record in records %}
+            {# Use spaceless tag to remove spaces inside the A tag. #}
+            {% spaceless %}
+            <article class="col-xs-12 col-md-6">
+                <h3 class="video-title">{{record.name}}</h3>
+                {% if record.file %}
+                <video controls width="570" height="360" aria-label="{{record.name}}">
+                    <source src="{{record.file.path}}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
 
-            <p>Attachment: {{record.file.file_name}}</p>
+                <p class="attachment-info">Attachment: {{record.file.file_name}}</p>
 
-            <div class="row"><div class="col-xs-12 col-md-4"><p><a class=" btn btn-secondary large fluid download" href="{{ ''| page }}?{{queries}}&download={{record.file.id}}&file_name={{record.name|replace({' ': '_'})}}">Download</a></p></div></div>
-
-            <p>&nbsp;</p>
-            {% endif %}
-
-            {% if record.youtube_url %}
-            <iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" src="{{record.youtube_url}}"></iframe>
-
-            <p>&nbsp;</p>
-            {% endif %}
-
-            {% if record.vimeo_url %}
-            <iframe width="640" height="360" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                    src="{{record.vimeo_url}}">
-            </iframe>
-            <p>&nbsp;</p>
-            {% endif %}
-            {% if record.getChildren.count %}
-            <div class="accordion-toggle folder row" style="margin-bottom: 80px; margin-top: -50px;">
-                <div class="col-xs-11">
-                    Watch the individual presentations
+                <div class="row">
+                    <div class="col-xs-12 col-md-4">
+                        <p>
+                            <a class="btn btn-secondary large fluid download"
+                               href="{{ ''| page }}?{{queries}}&download={{record.file.id}}&file_name={{record.name|replace({' ': '_'})}}"
+                               aria-label="Download {{record.name}} video">Download</a>
+                        </p>
+                    </div>
                 </div>
-                <div class="col-xs-1 end-xs plusminus"><span class="plus"></span></div>
-            </div>
-            <div class="accordion-content" style="display: none;">
-                {% for subvideo in record.getChildren %}
-                <div class="col-xs-12 col-md-6">
 
-                    <p>{{subvideo.name}}</p>
-                    {% if subvideo.file %}
-                    <video controls="" height="360px" width="570px"><source src="{{subvideo.file.path}}" type="video/mp4"></video>
+                {% endif %}
 
-                    <p>Attachment: {{subvideo.file.file_name}}</p>
+                {% if record.youtube_url %}
+                <iframe src="{{record.youtube_url}}"
+                        width="570"
+                        height="360"
+                        title="{{record.name}} - YouTube video"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                        class="video-iframe"></iframe>
 
-                    <div class="row"><div class="col-xs-12 col-md-4"><p><a class=" btn btn-secondary large fluid download" href="{{ ''| page }}?{{queries}}&download={{subvideo.file.id}}&file_name={{subvideo.name|replace({' ': '_'})}}">Download</a></p></div></div>
+                {% endif %}
 
-                    <p>&nbsp;</p>
-                    {% endif %}
+                {% if record.vimeo_url %}
+                <iframe src="{{record.vimeo_url}}"
+                        width="640"
+                        height="360"
+                        title="{{record.name}} - Vimeo video"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                        class="video-iframe"></iframe>
+                {% endif %}
+                {% if record.getChildren.count %}
+                <div class="accordion-wrapper">
+                    <button class="accordion-toggle folder row"
+                            aria-expanded="false"
+                            aria-controls="presentations-{{record.id}}">
+                        <span class="col-xs-11">Watch the individual presentations</span>
+                        <span class="col-xs-1 end-xs plusminus" aria-hidden="true"><span class="plus"></span></span>
+                    </button>
+                    <div class="accordion-content" id="presentations-{{record.id}}" hidden>
+                        {% for subvideo in record.getChildren %}
+                        <article class="col-xs-12 col-md-6">
 
-                    {% if subvideo.youtube_url %}
-                    <iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" src="{{subvideo.youtube_url}}" width="570" height="360"></iframe>
+                            <h4>{{subvideo.name}}</h4>
+                            {% if subvideo.file %}
+                            <video controls width="570" height="360" aria-label="{{subvideo.name}}">
+                                <source src="{{subvideo.file.path}}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
 
-                    <p>&nbsp;</p>
-                    {% endif %}
+                            <p class="attachment-info">Attachment: {{subvideo.file.file_name}}</p>
 
-                    {% if subvideo.vimeo_url %}
-                    <iframe width="640" height="360" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                            src="{{subvideo.vimeo_url}}">
-                    </iframe>
-                    <p>&nbsp;</p>
-                    {% endif %}
+                            <div class="row">
+                                <div class="col-xs-12 col-md-4">
+                                    <p>
+                                        <a class="btn btn-secondary large fluid download"
+                                           href="{{ ''| page }}?{{queries}}&download={{subvideo.file.id}}&file_name={{subvideo.name|replace({' ': '_'})}}"
+                                           aria-label="Download {{subvideo.name}} video">Download</a>
+                                    </p>
+                                </div>
+                            </div>
 
+                            {% endif %}
+
+                            {% if subvideo.youtube_url %}
+                            <iframe src="{{subvideo.youtube_url}}"
+                                    width="570"
+                                    height="360"
+                                    title="{{subvideo.name}} - YouTube video"
+                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen
+                                    class="video-iframe"></iframe>
+
+                            {% endif %}
+
+                            {% if subvideo.vimeo_url %}
+                            <iframe src="{{subvideo.vimeo_url}}"
+                                    width="640"
+                                    height="360"
+                                    title="{{subvideo.name}} - Vimeo video"
+                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen
+                                    class="video-iframe"></iframe>
+                            {% endif %}
+
+                        </article>
+                        {% endfor %}
+                    </div>
                 </div>
-                {% endfor %}
+                {% endif %}
+            </article>
+
+            {% endspaceless %}
+            {% else %}
+            <div class="col-xs-12 text-center" role="status">
+                <p>{{ noRecordsMessage }}</p>
             </div>
-            {% endif %}
+            {% endfor %}
+
+
         </div>
+        <div class="row" id="projectVideos" role="tabpanel" aria-labelledby="project-videos-heading" hidden>
+            <h2 id="project-videos-heading" class="sr-only">TIER2 Videos</h2>
 
-        {% endspaceless %}
-        {% else %}
-        {{ noRecordsMessage }}
-        {% endfor %}
+            {% set records = mediaProjectVideosList %}
 
+            {% for record in records %}
+            {# Use spaceless tag to remove spaces inside the A tag. #}
+            {% spaceless %}
+            <article class="col-xs-12 col-md-6">
+                <h3>{{record.name}}</h3>
+                {% if record.file %}
+                <video controls width="570" height="360" aria-label="{{record.name}}">
+                    <source src="{{record.file.path}}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
 
-    </div>
-    <div class="row" id="projectVideos">
+                <p class="attachment-info">Attachment: {{record.file.file_name}}</p>
 
-        {% set records = mediaProjectVideosList %}
-
-        {% for record in records %}
-        {# Use spaceless tag to remove spaces inside the A tag. #}
-        {% spaceless %}
-        <div class="col-xs-12 col-md-6" id="accordion-project-documents">
-            <p>{{record.name}}</p>
-            {% if record.file %}
-            <video controls="" height="360px" width="570px"><source src="{{record.file.path}}" type="video/mp4"></video>
-
-            <p>Attachment: {{record.file.file_name}}</p>
-
-            <div class="row"><div class="col-xs-12 col-md-4"><p><a class=" btn btn-secondary large fluid download" href="{{ ''| page }}?{{queries}}&download={{record.file.id}}&file_name={{record.name|replace({' ': '_'})}}">Download</a></p></div></div>
-
-            <p>&nbsp;</p>
-            {% endif %}
-
-            {% if record.youtube_url %}
-            <iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" src="{{record.youtube_url}}" width="570" height="360"></iframe>
-
-            <p>&nbsp;</p>
-            {% endif %}
-
-            {% if record.vimeo_url %}
-            <iframe width="640" height="360" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                    src="{{record.vimeo_url}}">
-            </iframe>
-            <p>&nbsp;</p>
-            {% endif %}
-            {% if record.getChildren.count %}
-            <div class="accordion-toggle folder row" style="margin-bottom: 80px; margin-top: -50px;">
-                <div class="col-xs-11">
-                    Watch the individual presentations
+                <div class="row">
+                    <div class="col-xs-12 col-md-4">
+                        <p>
+                            <a class="btn btn-secondary large fluid download"
+                               href="{{ ''| page }}?{{queries}}&download={{record.file.id}}&file_name={{record.name|replace({' ': '_'})}}"
+                               aria-label="Download {{record.name}} video">Download</a>
+                        </p>
+                    </div>
                 </div>
-                <div class="col-xs-1 end-xs plusminus"><span class="plus"></span></div>
-            </div>
-            <div class="accordion-content" style="display: none;">
-                {% for subvideo in record.getChildren %}
-                <div class="col-xs-12 col-md-6">
 
-                    <p>{{subvideo.name}}</p>
-                    {% if subvideo.file %}
-                    <video controls="" height="360px" width="570px"><source src="{{subvideo.file.path}}" type="video/mp4"></video>
+                {% endif %}
 
-                    <p>Attachment: {{subvideo.file.file_name}}</p>
+                {% if record.youtube_url %}
+                <iframe src="{{record.youtube_url}}"
+                        width="570"
+                        height="360"
+                        title="{{record.name}} - YouTube video"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                        class="video-iframe"></iframe>
 
-                    <div class="row"><div class="col-xs-12 col-md-4"><p><a class=" btn btn-secondary large fluid download" href="{{ ''| page }}?{{queries}}&download={{subvideo.file.id}}&file_name={{subvideo.name|replace({' ': '_'})}}">Download</a></p></div></div>
+                {% endif %}
 
-                    <p>&nbsp;</p>
-                    {% endif %}
+                {% if record.vimeo_url %}
+                <iframe src="{{record.vimeo_url}}"
+                        width="640"
+                        height="360"
+                        title="{{record.name}} - Vimeo video"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                        class="video-iframe"></iframe>
+                {% endif %}
+                {% if record.getChildren.count %}
+                <div class="accordion-wrapper">
+                    <button class="accordion-toggle folder row"
+                            aria-expanded="false"
+                            aria-controls="project-presentations-{{record.id}}">
+                        <span class="col-xs-11">Watch the individual presentations</span>
+                        <span class="col-xs-1 end-xs plusminus" aria-hidden="true"><span class="plus"></span></span>
+                    </button>
+                    <div class="accordion-content" id="project-presentations-{{record.id}}" hidden>
+                        {% for subvideo in record.getChildren %}
+                        <article class="col-xs-12 col-md-6">
 
-                    {% if subvideo.youtube_url %}
-                    <iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" src="{{subvideo.youtube_url}}" width="570" height="360"></iframe>
+                            <h4>{{subvideo.name}}</h4>
+                            {% if subvideo.file %}
+                            <video controls width="570" height="360" aria-label="{{subvideo.name}}">
+                                <source src="{{subvideo.file.path}}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
 
-                    <p>&nbsp;</p>
-                    {% endif %}
+                            <p class="attachment-info">Attachment: {{subvideo.file.file_name}}</p>
 
-                    {% if subvideo.vimeo_url %}
-                    <iframe width="640" height="360" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                            src="{{subvideo.vimeo_url}}">
-                    </iframe>
-                    <p>&nbsp;</p>
-                    {% endif %}
+                            <div class="row">
+                                <div class="col-xs-12 col-md-4">
+                                    <p>
+                                        <a class="btn btn-secondary large fluid download"
+                                           href="{{ ''| page }}?{{queries}}&download={{subvideo.file.id}}&file_name={{subvideo.name|replace({' ': '_'})}}"
+                                           aria-label="Download {{subvideo.name}} video">Download</a>
+                                    </p>
+                                </div>
+                            </div>
 
+                            {% endif %}
+
+                            {% if subvideo.youtube_url %}
+                            <iframe src="{{subvideo.youtube_url}}"
+                                    width="570"
+                                    height="360"
+                                    title="{{subvideo.name}} - YouTube video"
+                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen
+                                    class="video-iframe"></iframe>
+
+                            {% endif %}
+
+                            {% if subvideo.vimeo_url %}
+                            <iframe src="{{subvideo.vimeo_url}}"
+                                    width="640"
+                                    height="360"
+                                    title="{{subvideo.name}} - Vimeo video"
+                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen
+                                    class="video-iframe"></iframe>
+                            {% endif %}
+
+                        </article>
+                        {% endfor %}
+                    </div>
                 </div>
-                {% endfor %}
+                {% endif %}
+            </article>
+
+            {% endspaceless %}
+            {% else %}
+            <div class="col-xs-12 text-center" role="status">
+                <p>{{ noRecordsMessage }}</p>
             </div>
-            {% endif %}
+            {% endfor %}
+
         </div>
+        <div class="row" id="relevantVideos" role="tabpanel" aria-labelledby="relevant-videos-heading" hidden>
+            <h2 id="relevant-videos-heading" class="sr-only">Relevant Videos</h2>
+            {% set records = mediaRelevantVideosList %}
 
-        {% endspaceless %}
-        {% else %}
-        {{ noRecordsMessage }}
-        {% endfor %}
+            {% for record in records %}
+            {# Use spaceless tag to remove spaces inside the A tag. #}
+            {% spaceless %}
+            <article class="col-xs-12 col-md-6">
+                <h3>{{record.name}}</h3>
+                {% if record.file %}
+                <video controls width="570" height="360" aria-label="{{record.name}}">
+                    <source src="{{record.file.path}}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
 
-    </div>
-    <div class="row" id="relevantVideos">
-        {% set records = mediaRelevantVideosList %}
+                <p class="attachment-info">Attachment: {{record.file.file_name}}</p>
 
-        {% for record in records %}
-        {# Use spaceless tag to remove spaces inside the A tag. #}
-        {% spaceless %}
-        <div class="col-xs-12 col-md-6" id="accordion-relevant-documents">
-            <p>{{record.name}}</p>
-            {% if record.file %}
-            <video controls="" height="360px" width="570px"><source src="{{record.file.path}}" type="video/mp4"></video>
-
-            <p>Attachment: {{record.file.file_name}}</p>
-
-            <div class="row"><div class="col-xs-12 col-md-4"><p><a class=" btn btn-secondary large fluid download" href="{{ ''| page }}?{{queries}}&download={{record.file.id}}&file_name={{record.name|replace({' ': '_'})}}">Download</a></p></div></div>
-
-            <p>&nbsp;</p>
-            {% endif %}
-
-            {% if record.youtube_url %}
-            <iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" src="{{record.youtube_url}}" width="570" height="360"></iframe>
-
-            <p>&nbsp;</p>
-            {% endif %}
-
-            {% if record.vimeo_url %}
-            <iframe width="640" height="360" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                    src="{{record.vimeo_url}}">
-            </iframe>
-            <p>&nbsp;</p>
-            {% endif %}
-            {% if record.getChildren.count %}
-            <div class="accordion-toggle folder row" style="margin-bottom: 80px; margin-top: -50px;">
-                <div class="col-xs-11">
-                    Watch the individual presentations
+                <div class="row">
+                    <div class="col-xs-12 col-md-4">
+                        <p>
+                            <a class="btn btn-secondary large fluid download"
+                               href="{{ ''| page }}?{{queries}}&download={{record.file.id}}&file_name={{record.name|replace({' ': '_'})}}"
+                               aria-label="Download {{record.name}} video">Download</a>
+                        </p>
+                    </div>
                 </div>
-                <div class="col-xs-1 end-xs plusminus"><span class="plus"></span></div>
-            </div>
-            <div class="accordion-content" style="display: none;">
-                {% for subvideo in record.getChildren %}
-                <div class="col-xs-12 col-md-6">
 
-                    <p>{{subvideo.name}}</p>
-                    {% if subvideo.file %}
-                    <video controls="" height="360px" width="570px"><source src="{{subvideo.file.path}}" type="video/mp4"></video>
+                {% endif %}
 
-                    <p>Attachment: {{subvideo.file.file_name}}</p>
+                {% if record.youtube_url %}
+                <iframe src="{{record.youtube_url}}"
+                        width="570"
+                        height="360"
+                        title="{{record.name}} - YouTube video"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                        class="video-iframe"></iframe>
 
-                    <div class="row"><div class="col-xs-12 col-md-4"><p><a class=" btn btn-secondary large fluid download" href="{{ ''| page }}?{{queries}}&download={{subvideo.file.id}}&file_name={{subvideo.name|replace({' ': '_'})}}">Download</a></p></div></div>
+                {% endif %}
 
-                    <p>&nbsp;</p>
-                    {% endif %}
+                {% if record.vimeo_url %}
+                <iframe src="{{record.vimeo_url}}"
+                        width="640"
+                        height="360"
+                        title="{{record.name}} - Vimeo video"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                        class="video-iframe"></iframe>
+                {% endif %}
+                {% if record.getChildren.count %}
+                <div class="accordion-wrapper">
+                    <button class="accordion-toggle folder row"
+                            aria-expanded="false"
+                            aria-controls="relevant-presentations-{{record.id}}">
+                        <span class="col-xs-11">Watch the individual presentations</span>
+                        <span class="col-xs-1 end-xs plusminus" aria-hidden="true"><span class="plus"></span></span>
+                    </button>
+                    <div class="accordion-content" id="relevant-presentations-{{record.id}}" hidden>
+                        {% for subvideo in record.getChildren %}
+                        <article class="col-xs-12 col-md-6">
 
-                    {% if subvideo.youtube_url %}
-                    <iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" src="{{subvideo.youtube_url}}" width="570" height="360"></iframe>
+                            <h4>{{subvideo.name}}</h4>
+                            {% if subvideo.file %}
+                            <video controls width="570" height="360" aria-label="{{subvideo.name}}">
+                                <source src="{{subvideo.file.path}}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
 
-                    <p>&nbsp;</p>
-                    {% endif %}
+                            <p class="attachment-info">Attachment: {{subvideo.file.file_name}}</p>
 
-                    {% if subvideo.vimeo_url %}
-                    <iframe width="640" height="360" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                            src="{{subvideo.vimeo_url}}">
-                    </iframe>
-                    <p>&nbsp;</p>
-                    {% endif %}
+                            <div class="row">
+                                <div class="col-xs-12 col-md-4">
+                                    <p>
+                                        <a class="btn btn-secondary large fluid download"
+                                           href="{{ ''| page }}?{{queries}}&download={{subvideo.file.id}}&file_name={{subvideo.name|replace({' ': '_'})}}"
+                                           aria-label="Download {{subvideo.name}} video">Download</a>
+                                    </p>
+                                </div>
+                            </div>
 
+                            {% endif %}
+
+                            {% if subvideo.youtube_url %}
+                            <iframe src="{{subvideo.youtube_url}}"
+                                    width="570"
+                                    height="360"
+                                    title="{{subvideo.name}} - YouTube video"
+                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen
+                                    class="video-iframe"></iframe>
+
+                            {% endif %}
+
+                            {% if subvideo.vimeo_url %}
+                            <iframe src="{{subvideo.vimeo_url}}"
+                                    width="640"
+                                    height="360"
+                                    title="{{subvideo.name}} - Vimeo video"
+                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen
+                                    class="video-iframe"></iframe>
+                            {% endif %}
+
+                        </article>
+                        {% endfor %}
+                    </div>
                 </div>
-                {% endfor %}
+                {% endif %}
+            </article>
+
+            {% endspaceless %}
+            {% else %}
+            <div class="col-xs-12 text-center" role="status">
+                <p>{{ noRecordsMessage }}</p>
             </div>
-            {% endif %}
+            {% endfor %}
+
         </div>
-
-        {% endspaceless %}
-        {% else %}
-        {{ noRecordsMessage }}
-        {% endfor %}
-
-    </div>
-</div>
+    </section>
+</main>

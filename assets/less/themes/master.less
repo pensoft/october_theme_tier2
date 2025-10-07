@@ -184,13 +184,13 @@ p:has(.edit-link){
             }
 
             span{
-                color:#ffffff;    
+                color:#ffffff;
                 text-shadow: 5px 0 #ffffff;
                 letter-spacing: 6px;
                 font-weight: bold;
                 .breakpoint-small-down({
                    text-shadow: 3px 0 #ffffff;
-                }); 
+                });
             }
 
             .breakpoint-laptop-down({
@@ -318,6 +318,12 @@ p:has(.edit-link){
         opacity: 0.4!important;
     }
 
+    h2{
+        font-size: 18px;
+        text-transform: uppercase;
+        width: fit-content;
+
+    }
     .container-fluid {
         &.dark-background {
             background: @dark-color;
@@ -326,6 +332,12 @@ p:has(.edit-link){
                 list-style-type: none;
                 padding: 0;
                 margin: 20px 0;
+                display: flex;
+                flex-direction: column;
+
+                li{
+                    margin: 0;
+                }
 
 
                 a {
@@ -336,9 +348,14 @@ p:has(.edit-link){
         }
         &.subscribe-newsletter-background{
             background: @link-color;
+            h2, p{
+                margin-bottom: 0;
+                color: white!important;
+            }
             .container{
                 padding: 40px 0!important;
                 color: @white-color;
+
                 .btn{
                     color: @link-color;
                     background: @white-color;
@@ -377,6 +394,8 @@ p:has(.edit-link){
         color: @footer-text-color;
         font-size: 18px!important;
         img{
+            height: 56px;
+            width: auto;
           .breakpoint-small-down({
             margin-bottom: 20px;
           });
@@ -396,11 +415,13 @@ p:has(.edit-link){
     .powered-by {
         display: flex;
         flex: 1 0 auto;
-        color: @footer-text-color;
+        color: @footer-text-color!important;
         font-size: 14px!important;
         white-space: nowrap;
         padding-left: 0;
-
+        p{
+            color: @footer-text-color!important;
+        }
         .pensoft_logo{
             float: right;
             margin-top: 3px;
@@ -1027,7 +1048,7 @@ now override the 3.3 new styles for modern browsers & apply opacity
             align-items: center;
             line-height: 20px;
         }
-        
+
         li::before {
             content: " ";
             background: #58dbce;
@@ -1045,7 +1066,7 @@ now override the 3.3 new styles for modern browsers & apply opacity
           }
     }
 
-    h4{       
+    h4{
         line-height: 70px;
         font-size: 46px;
         font-weight: bold;
@@ -1195,7 +1216,7 @@ now override the 3.3 new styles for modern browsers & apply opacity
           display: flex;
           align-items: center;
           justify-content: center;
-      });            
+      });
   }
   .breakpoint-large-down({
       margin-left: unset;
@@ -1203,7 +1224,7 @@ now override the 3.3 new styles for modern browsers & apply opacity
       flex-direction: column;
       align-items: center;
       justify-content: center;
-  });     
+  });
 }
 
 .container:has(.highlights-news){
@@ -1250,4 +1271,75 @@ now override the 3.3 new styles for modern browsers & apply opacity
 
 .toTheTop.sticky {
   position: absolute;
+}
+
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #000;
+    color: #fff;
+    padding: 8px;
+    z-index: 100;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+.close-search {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    font: inherit;
+    padding: 0;
+}
+
+.close-search:focus {
+    outline: 2px solid #000;
+    outline-offset: 2px;
+}
+
+/* Move inline styles to CSS */
+.social-linkedin {
+    margin-bottom: 4px;
+}
+
+.social-youtube {
+    font-size: 37px;
+}
+
+.social-researchgate {
+    width: 64px;
+}
+
+/* Open call intro styling */
+.white_intro {
+    display: block;
+    color: white;
+}
+
+.green_intro {
+    display: block;
+    color: green;
+}
+
+.open-call-intro h1 {
+    font-size: inherit;
+    font-weight: inherit;
+    margin: inherit;
 }

@@ -33,89 +33,111 @@ function onStart()
 ==
 {% component 'siteSearchInclude' %}
 
-<div class="container-fluid pilots">
+<main id="main-content" role="main">
+    <section class="container-fluid pilots" aria-labelledby="pilots-heading">
 
-    <div class="pilots-intro">
-        {% component 'pilots_intro' %}
-    </div>
-    
-    <div class="container">
-        <div class="row pilot-row">
-            {% for pilot in pilots %}
-            <div class="col-xs-12 pilot-item">
-                <div class="row pilot-content">
-                    {% if pilot.title %}
-                    <div class="col-xs-12 pilot-header mb-1">{{ pilot.title }}</div>
-                    {% endif %}
-                    {% if pilot.intro %}
-                    <div class="col-xs-12 intro">{{ pilot.intro | raw }}</div>
-                    {% endif %}
-                    {% if pilot.name %}
-                    <div class="col-xs-12 name mb-1"><span class="subhead">Name: </span>{{ pilot.name }}</div>
-                    {% endif %}
-                    {% if pilot.stakeholders %}
-                    <div class="col-xs-12 stakeholders mb-1">
-                        {{pilot.stakeholders | raw}}
-                    </div>
-                    {% endif %}
-                    <div class="col-xs-12 timeline-d mb-1">
-                        <span class="subhead">Timeline: </span>
-                        {% if pilot.timeline_start %}
-                        {{ pilot.timeline_start|date('F Y') }}
+        <div class="pilots-intro">
+            {% component 'pilots_intro' %}
+        </div>
+
+        <div class="container">
+            <div class="row pilot-row">
+                {% for pilot in pilots %}
+                <article class="col-xs-12 pilot-item">
+                    <div class="row pilot-content">
+                        {% if pilot.title %}
+                        <header class="col-xs-12 pilot-header mb-1">
+                            <h2>{{ pilot.title }}</h2>
+                        </header>
                         {% endif %}
-                        -
-                        {% if pilot.timeline_end %}
-                        {{ pilot.timeline_end|date('F Y') }}
+                        {% if pilot.intro %}
+                        <div class="col-xs-12 intro">{{ pilot.intro | raw }}</div>
                         {% endif %}
-                    </div>                    
-                    {% if pilot.objectives %}
-                    <div class="col-xs-12 objectives mb-1">
-                        {{ pilot.objectives | raw }}
-                    </div>
-                    {% endif %}
-                </div>
-                {% if pilot.contacts %}
-                <div class="pilot-seperator mb-1"></div>
-                {% endif %}
-                <div class="row pilot-contact between-xs">
-                    <div class="col-md-12 col-xs-12">
-                        {% if pilot.contacts %}
-                        <div class="row contact-row">
-                            <span class="subhead mr-1">Contact info: </span>
-                            {% for contact in pilot.contacts %}
-                            <div class="pilot-contact-info">
-                                {% if contact.email %}
-                                <a class="pilot-contact-name" href="mailto:{{ contact.email }}">
-                                    {{ contact.names }} &nbsp; <span>{% if contact.partner.instituion %} ({{ contact.partner.instituion }}) {% endif %}</span>
-                                </a>
-                                {% else %}
-                                <a class="pilot-contact-name">
-                                    {{ contact.names }} &nbsp; <span>{% if contact.partner.instituion %} ({{ contact.partner.instituion }}) {% endif %}</span>
-                                </a>
-                                {% endif %}
-                            </div>
-                        {% endfor %}
-                        
+                        {% if pilot.name %}
+                        <div class="col-xs-12 name mb-1">
+                            <span class="subhead">Name: </span>{{ pilot.name }}
+                        </div>
+                        {% endif %}
+                        {% if pilot.stakeholders %}
+                        <div class="col-xs-12 stakeholders mb-1">
+                            {{pilot.stakeholders | raw}}
+                        </div>
+                        {% endif %}
+                        <div class="col-xs-12 timeline-d mb-1">
+                            <span class="subhead">Timeline: </span>
+                            {% if pilot.timeline_start %}
+                            <time datetime="{{pilot.timeline_start|date('Y-m')}}">{{ pilot.timeline_start|date('F Y') }}</time>
+                            {% endif %}
+                            -
+                            {% if pilot.timeline_end %}
+                            <time datetime="{{pilot.timeline_end|date('Y-m')}}">{{ pilot.timeline_end|date('F Y') }}</time>
+                            {% endif %}
+                        </div>
+                        {% if pilot.objectives %}
+                        <div class="col-xs-12 objectives mb-1">
+                            {{ pilot.objectives | raw }}
                         </div>
                         {% endif %}
                     </div>
-                    {% if pilot.link_to_news %}
-                    <div class="col-md-12 col-xs-12 end-xs mt-2">
-                        
-                        {% if pilot.id == 9 %}
-                        <a href="https://publishers.fairassist.org/" target="_blank" class="btn btn-primary">Handbook</a>
-                        {% endif %}
-                        {% if pilot.id == 4 %}
-                        <a href="https://schema-lab.hypatia-comp.athenarc.gr/" target="_blank" class="btn btn-primary">SCHEMA lab</a>
-                        {% endif %}
-                        <a href="{{pilot.link_to_news}}" class="btn btn-primary">Find out more</a>
-                    </div>
+                    {% if pilot.contacts %}
+                    <div class="pilot-seperator mb-1" role="separator" aria-hidden="true"></div>
                     {% endif %}
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-</div>
+                    <div class="row pilot-contact between-xs">
+                        <div class="col-md-12 col-xs-12">
+                            {% if pilot.contacts %}
+                            <div class="row contact-row">
+                                <h3 class="subhead mr-1">Contact info</h3>
+                                <ul class="pilot-contact-list">
+                                    {% for contact in pilot.contacts %}
+                                    <li class="pilot-contact-info">
+                                        {% if contact.email %}
+                                        <a class="pilot-contact-name"
+                                           href="mailto:{{ contact.email }}"
+                                           aria-label="Email {{ contact.names }}{% if contact.partner.instituion %} from {{ contact.partner.instituion }}{% endif %}">
+                                            {{ contact.names }}{% if contact.partner.instituion %} <span>({{ contact.partner.instituion }})</span>{% endif %}
+                                        </a>
+                                        {% else %}
+                                        <span class="pilot-contact-name">
+                                        {{ contact.names }}{% if contact.partner.instituion %} <span>({{ contact.partner.instituion }})</span>{% endif %}
+                                    </span>
+                                        {% endif %}
+                                    </li>
+                                    {% endfor %}
+                                </ul>
 
-<a class="toTheTop" title="Back to the top">&nbsp;</a>
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% if pilot.link_to_news %}
+                        <div class="col-md-12 col-xs-12 end-xs mt-2">
+
+                            {% if pilot.id == 9 %}
+                            <a href="https://publishers.fairassist.org/"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               class="btn btn-primary"
+                               aria-label="View Handbook for {{ pilot.title }} (opens in new window)">Handbook</a>
+                            {% endif %}
+                            {% if pilot.id == 4 %}
+                            <a href="https://schema-lab.hypatia-comp.athenarc.gr/"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               class="btn btn-primary"
+                               aria-label="View SCHEMA lab for {{ pilot.title }} (opens in new window)">SCHEMA lab</a>
+                            {% endif %}
+                            <a href="{{pilot.link_to_news}}"
+                               class="btn btn-primary"
+                               aria-label="Find out more about {{ pilot.title }}">Find out more</a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <a href="#headernavbar" class="toTheTop" aria-label="Back to the top">
+        <span class="sr-only">Back to the top</span>
+    </a>
+</main>

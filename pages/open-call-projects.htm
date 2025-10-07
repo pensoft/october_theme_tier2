@@ -12,6 +12,9 @@ templates = "template1"
 description_limit = 0
 ==
 {% component 'siteSearchInclude' %}
-<div class="container open_call_projects_container">
+<main id="main-content" role="main">
+    <section class="container open_call_projects_container" aria-labelledby="award-heading">
+        <h1 id="award-heading" class="sr-only">RN Award</h1>
 		{% component 'jumbotron' %}
-	</div>
+	</section>
+</main>

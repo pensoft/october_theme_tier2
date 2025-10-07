@@ -6,63 +6,91 @@ primaryClasses = "navbar-nav"
 secondaryClasses = "dropdown-menu"
 numberOfLevels = 2
 ==
-<nav class="navbar fixed pr-3 pl-1" id="headernavbar">
+<nav class="navbar fixed pr-3 pl-1" id="headernavbar" aria-label="Main navigation">
     <div id="menuToggle">
-        <input type="checkbox" />
-        <span></span>
-        <span></span>
-        <span></span>
-        {% component 'menu' %}
+        <input type="checkbox" id="menu-toggle-checkbox" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu" />
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <div id="mobile-menu">
+            {% component 'menu' %}
+        </div>
     </div>
 
 
-    <a href="{{'home'|page}}" class="navbar-brand" id="navbar-brand" style="background-image: url('{{ this.theme.site_logo.getPath() }}'); background-position: center; background-size: contain;"></a>
+    <a href="{{'home'|page}}" class="navbar-brand" id="navbar-brand" aria-label="Home" style="background-image: url('{{ this.theme.site_logo.getPath() }}'); background-position: center; background-size: contain;">
+        <span class="sr-only">Home</span>
+    </a>
 
 
     <div class="navbar-collapse collapse end-xs" id="headerNavbarNav" style="display: none;">
         {% component 'menu' %}
         <div id="headerNavbarLogin">
-            <ul class="navbar-nav" style="padding: 0; margin: 0;">
+            <ul class="navbar-nav" style="padding: 0; margin: 0;" role="list">
 
             </ul>
         </div>
     </div>
 
-    <a class="pr p-search middle search-btn" onclick="showSearchForm();"></a>
+    <a class="pr p-search middle search-btn" onclick="showSearchForm();" aria-label="Open search" aria-expanded="false" aria-controls="search">
+        <span class="sr-only">Search</span>
+    </a>
 
     {% if this.theme.twitter_url %}
-    <a href="{{this.theme.twitter_url}}" target="_blank" class="pr p-twitter normal"></a>
+    <a href="{{this.theme.twitter_url}}" target="_blank" rel="noopener noreferrer" class="pr p-twitter normal" aria-label="Follow us on Twitter (opens in new window)">
+        <span class="sr-only">Twitter</span>
+    </a>
     {% endif %}
     {% if this.theme.facebook_url %}
-    <a href="{{this.theme.facebook_url}}" target="_blank" class="pr p-facebook big"></a>
+    <a href="{{this.theme.facebook_url}}" target="_blank" rel="noopener noreferrer" class="pr p-facebook big" aria-label="Follow us on Facebook (opens in new window)">
+        <span class="sr-only">Facebook</span>
+    </a>
     {% endif %}
     {% if this.theme.linkedin_url %}
-    <a href="{{this.theme.linkedin_url}}" target="_blank" class="pr p-linkedin big" style="margin-bottom: 4px;"></a>
+    <a href="{{this.theme.linkedin_url}}" target="_blank" rel="noopener noreferrer" class="pr p-linkedin big social-linkedin" aria-label="Follow us on LinkedIn (opens in new window)">
+        <span class="sr-only">LinkedIn</span>
+    </a>
     {% endif %}
     {% if this.theme.youtube_url %}
-    <a href="{{this.theme.youtube_url}}" target="_blank" class="pr p-youtube normal" style="font-size: 37px;"></a>
+    <a href="{{this.theme.youtube_url}}" target="_blank" rel="noopener noreferrer" class="pr p-youtube normal social-youtube" aria-label="Follow us on YouTube (opens in new window)">
+        <span class="sr-only">YouTube</span>
+    </a>
     {% endif %}
     {% if this.theme.instagram_url %}
-    <a href="{{this.theme.instagram_url}}" target="_blank" class="pr p-instagram big"></a>
+    <a href="{{this.theme.instagram_url}}" target="_blank" rel="noopener noreferrer" class="pr p-instagram big" aria-label="Follow us on Instagram (opens in new window)">
+        <span class="sr-only">Instagram</span>
+    </a>
     {% endif %}
     {% if this.theme.researchgate_url %}
-    <a href="{{this.theme.researchgate_url}}" target="_blank" class="pr p-researchgate big" style="width: 64px;"></a>
+    <a href="{{this.theme.researchgate_url}}" target="_blank" rel="noopener noreferrer" class="pr p-researchgate big social-researchgate" aria-label="Follow us on ResearchGate (opens in new window)">
+        <span class="sr-only">ResearchGate</span>
+    </a>
     {% endif %}
     {% if this.theme.bluesky_url %}
-    <a href="{{this.theme.bluesky_url}}" target="_blank" class="pr p-bluesky normal"></a>
+    <a href="{{this.theme.bluesky_url}}" target="_blank" rel="noopener noreferrer" class="pr p-bluesky normal" aria-label="Follow us on Bluesky (opens in new window)">
+        <span class="sr-only">Bluesky</span>
+    </a>
     {% endif %}
     {% if this.theme.threads_url %}
-    <a href="{{this.theme.threads_url}}" target="_blank" class="pr p-threads normal"></a>
+    <a href="{{this.theme.threads_url}}" target="_blank" rel="noopener noreferrer" class="pr p-threads normal" aria-label="Follow us on Threads (opens in new window)">
+        <span class="sr-only">Threads</span>
+    </a>
     {% endif %}
 
 
-    <div id="search" class="search" style="display: none;">
-        <div class="close-search" onclick="hideSearchForm();"></div>
+    <div id="search" class="search" style="display: none;" role="search" aria-label="Site search">
+        <a class="close-search" onclick="hideSearchForm();" aria-label="Close search">
+            <span class="sr-only">Close</span>
+        </a>
         <form class="input-group align-items-start" action="{{ url('search')}}" method="get">
-            <input class="form-control search_input" style="color: #000;" name="q" type="text" autocomplete="on" placeholder="Search">
-            <button class="btn btn-link pr p-search big text-grey-search-btn" type="submit"></button>
+            <label for="search-input" class="sr-only">Search</label>
+            <input class="form-control search_input" id="search-input" style="color: #000;" name="q" type="text" autocomplete="on" placeholder="Search" aria-label="Search query">
+            <a class="btn btn-link pr p-search big text-grey-search-btn" type="submit" aria-label="Submit search">
+                <span class="sr-only">Search</span>
+            </a>
         </form>
     </div>
+
 
 </nav>
 
@@ -70,33 +98,34 @@ numberOfLevels = 2
 
 
 {% if this.theme.header_image and page_id != 'search' %}
-<div class="header-image {{page_id}}">
+<div class="header-image {{page_id}}" role="banner">
     {% if page_id != 'search' %}
-        {%if this.page.header_image %}
-        <div class="header-image-bar" style="background-image: url('{{this.page.header_image|media}}'); background-position: left center;"></div>
-        {%else%}
-        <div class="header-image-bar" style="background-image: url('{{this.theme.header_image.getPath()}}'); background-position: left center;"></div>
-        {%endif%}
+    {%if this.page.header_image %}
+    <div class="header-image-bar" style="background-image: url('{{this.page.header_image|media}}'); background-position: left center;" role="img" aria-label="Header banner"></div>
+    {%else%}
+    <div class="header-image-bar" style="background-image: url('{{this.theme.header_image.getPath()}}'); background-position: left center;" role="img" aria-label="Header banner"></div>
+    {%endif%}
     {%endif%}
     <div class="jumbotron" data-aos="fade-right">
         {% if page_id != 'home' and page_id != 'search' and page_id != 'open-call-projects' %}
-            <h1 class="underline white">
+        <h1 class="underline white">
             {%if page_title%} {{page_title}} {%else%} {{site_name}} {%endif%}</h1>
         {%endif%}
         {% if page_id == 'home' and tag_line%}
         <div class="container">
             <div class="intro">
-            <div class="logo_main"></div>
-            <p>{{tag_line|raw}}</p>
+                <div class="logo_main" role="img" aria-label="Project logo"></div>
+                <p>{{tag_line|raw}}</p>
             </div>
         </div>
         {% endif %}
         {% if page_id == 'open-call-projects'%}
         <div class="container">
             <div class="open-call-intro">
-            <span class="white_intro">TIER2 Award for Establishing<br> a Reproducibility Network</span>
-            <span class="green_intro">Meet the Awardees</span>
-            <!--<a class="btn btn-primary" href="https://tier2-project.eu/storage/app/media/Application_Form_SecondCall.docx">Apply</a> -->
+                <h1>
+                    <span class="white_intro">TIER2 Award for Establishing a Reproducibility Network</span>
+                    <span class="green_intro">Meet the Awardees</span>
+                </h1>
             </div>
         </div>
         {% endif %}

@@ -28,91 +28,95 @@ function onStart(){
 }
 ?>
 ==
-{% component 'siteSearchInclude' %}<div class="container-fluid bg_media">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-md-10 col-xs-12">
-                <div class="row">
-                    {% if logos.count() %}
-                    <div class="col-md-4 col-sm-6 col-xs-12">
-                        <div class="card-container text-center">
-                            <a href="{{url('media-center')}}/brand-kit" title="Brand kit">
-                                <span class="card_image_container" style="background: url({{'pensoft/media1.svg'|media}}) center center no-repeat;" href="{{url('media-center')}}/brand-kit" title="Brand kit"></span>
-                                <span class="media_label">Brand kit</span>
-                            </a>
+{% component 'siteSearchInclude' %}
+<main id="main-content" role="main">
+    <section class="container-fluid bg_media" aria-labelledby="media-center-heading">
+        <div class="container">
+            <h1 id="media-center-heading" class="sr-only">Media Center</h1>
+            <div class="row">
+                <nav class="col-lg-8 col-md-10 col-xs-12" aria-label="Media center categories">
+                    <div class="row">
+                        {% if logos.count() %}
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="card-container text-center">
+                                <a href="{{url('media-center')}}/brand-kit" aria-label="Brand kit">
+                                    <span class="card_image_container media-icon" role="img" aria-label="Brand kit icon" style="background: url({{'pensoft/media1.svg'|media}}) center center no-repeat;"></span>
+                                    <span class="media_label">Brand kit</span>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    {% endif %}
-                    {% if flyers.count() %}
-                    <div class="col-md-4 col-sm-6 col-xs-12">
-                        <div class="card-container text-center">
-                            <a href="{{url('media-center')}}/flyer" title="Promotional materials">
-                                <span class="card_image_container" style="background: url({{'pensoft/media2.svg'|media}}) center center no-repeat;" href="{{url('media-center')}}/flyer" title="Flyer and poster"></span>
-                                <span class="media_label">Promotional materials</span>
-                            </a>
+                        {% endif %}
+                        {% if flyers.count() %}
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="card-container text-center">
+                                <a href="{{url('media-center')}}/flyer" aria-label="Promotional materials">
+                                    <span class="card_image_container media-icon" role="img" aria-label="Promotional materials icon" style="background: url({{'pensoft/media2.svg'|media}}) center center no-repeat;"></span>
+                                    <span class="media_label">Promotional materials</span>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    {% endif %}
+                        {% endif %}
 
-                    {% if pressreleases.count() %}
-                    <div class="col-md-4 col-sm-6 col-xs-12">
-                        <div class="card-container text-center">
-                            <a href="{{url('media-center')}}/press-releases" title="Announcements">
-                                <span class="card_image_container" style="background: url({{'pensoft/media3.svg'|media}}) center center no-repeat;" href="{{url('media-center')}}/press-releases" title="Announcements"></span>
-                                <span class="media_label">Announcements</span>
-                            </a>
+                        {% if pressreleases.count() %}
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="card-container text-center">
+                                <a href="{{url('media-center')}}/press-releases" aria-label="Announcements">
+                                    <span class="card_image_container media-icon" role="img" aria-label="Announcements icon" style="background: url({{'pensoft/media3.svg'|media}}) center center no-repeat;"></span>
+                                    <span class="media_label">Announcements</span>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    {% endif %}
-                    {% if newsletters.count() %}
-                    <div class="col-md-4 col-sm-6 col-xs-12">
-                        <div class="card-container text-center">
-                            <a href="{{url('media-center')}}/newsletters" title="Newsletters">
-                                <span class="card_image_container" style="background: url({{'pensoft/media4.svg'|media}}) center center no-repeat;" href="{{url('media-center')}}/newsletters" title="Newsletters"></span>
-                                <span class="media_label">Newsletters</span>
-                            </a>
+                        {% endif %}
+                        {% if newsletters.count() %}
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="card-container text-center">
+                                <a href="{{url('media-center')}}/newsletters" aria-label="Newsletters">
+                                    <span class="card_image_container media-icon" role="img" aria-label="Newsletters icon" style="background: url({{'pensoft/media4.svg'|media}}) center center no-repeat;"></span>
+                                    <span class="media_label">Newsletters</span>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    {% endif %}
+                        {% endif %}
 
-                    {% if videos.count() %}
-                    <div class="col-md-4 col-sm-6 col-xs-12">
-                        <div class="card-container text-center">
-                            <a href="{{url('media-center')}}/videos" title="Videos">
-                                <span class="card_image_container" style="background: url({{'pensoft/media5.svg'|media}}) center center no-repeat;" href="{{url('media-center')}}/videos" title="Videos"></span>
-                                <span class="media_label">Videos</span>
-                            </a>
+                        {% if videos.count() %}
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="card-container text-center">
+                                <a href="{{url('media-center')}}/videos" aria-label="Videos">
+                                    <span class="card_image_container media-icon" role="img" aria-label="Videos icon" style="background: url({{'pensoft/media5.svg'|media}}) center center no-repeat;"></span>
+                                    <span class="media_label">Videos</span>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    {% endif %}
-                    <!--        //Presentations-->
-                    {% if presentations.count() %}
-                    <div class="col-md-4 col-sm-6 col-xs-12">
-                        <div class="card-container text-center">
-                            <a href="{{url('media-center')}}/presentations" title="Presentations">
-                                <span class="card_image_container" style="background: url({{'pensoft/Presentations.svg'|media}}) center center no-repeat;" href="{{url('media-center')}}/presentations" title="Presentations"></span>
-                                <span class="media_label">Presentations</span>
-                            </a>
+                        {% endif %}
+                        <!--        //Presentations-->
+                        {% if presentations.count() %}
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="card-container text-center">
+                                <a href="{{url('media-center')}}/presentations" aria-label="Presentations">
+                                    <span class="card_image_container media-icon" role="img" aria-label="Presentations icon" style="background: url({{'pensoft/Presentations.svg'|media}}) center center no-repeat;"></span>
+                                    <span class="media_label">Presentations</span>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    {% endif %}
-                    <!--        //graphics-->
-                    {% if graphics.count() %}
-                    <div class="col-md-4 col-sm-6 col-xs-12">
-                        <div class="card-container text-center">
-                            <a href="{{url('media-center')}}/other" title="Other">
-                                <span class="card_image_container" style="background: url({{'pensoft/media6.svg'|media}}) center center no-repeat;" href="{{url('media-center')}}/other" title="Other"></span>
-                                <span class="media_label">Other</span>
-                            </a>
+                        {% endif %}
+                        <!--        //graphics-->
+                        {% if graphics.count() %}
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="card-container text-center">
+                                <a href="{{url('media-center')}}/other" aria-label="Other">
+                                    <span class="card_image_container media-icon" role="img" aria-label="Other media icon" style="background: url({{'pensoft/media6.svg'|media}}) center center no-repeat;"></span>
+                                    <span class="media_label">Other</span>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    {% endif %}
+                        {% endif %}
 
 
-                </div>
+                    </div>
+                </nav>
+                <div class="col-md-4 col-xs-12"></div>
             </div>
-            <div class="col-md-4 col-xs-12"></div>
-        </div>
 
-    </div>
-</div>
+        </div>
+    </section>
+</main>

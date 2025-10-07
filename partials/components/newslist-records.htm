@@ -1,28 +1,30 @@
 <div class="row">
     {% for record in records %}
     {% spaceless %}
-    <div class="col-xs-12 news-item">
+    <article class="col-xs-12 news-item">
         <div class="row news_column">
-            <div class="text-published">{{record.published_at | date('d F Y') }}</div>
-            <a href="{{'news'|page}}/{{record.slug}}">
+            <time class="text-published" datetime="{{record.published_at|date('Y-m-d')}}">{{record.published_at | date('d F Y') }}</time>
+            <a href="{{'news'|page}}/{{record.slug}}" aria-label="Read {{record.title}}">
                 {% if record.cover %}
                 <div class="news-image col-xs-12 center-xs">
-                    <img class="news-img-top" src="{{record.cover.getThumb(379, 305, {'mode': 'crop'})}}">
+                    <img class="news-img-top" src="{{record.cover.getThumb(379, 305, {'mode': 'crop'})}}" alt="{{record.title}}">
                 </div>
                 {% endif %}
                 <div class="news-container col-xs-12">
 
                     <div class="news-title">
-                        <h3 class="card-title">{{record.title}}</h3>
+                        <h2 class="card-title">{{record.title}}</h2>
                     </div>
 
                     <div class="body">{{ record.content|length > 450 ? record.content|striptags|slice(0, 450)|replace({"&nbsp;": " ", ".": ". "}) ~ '...' : record.content|striptags|replace({"&nbsp;": " ", ".": ". "})  }}</div>
                 </div>
             </a>
         </div>
-    </div>
+    </article>
     {% endspaceless %}
     {% else %}
-    No news
+    <div class="col-xs-12 text-center" role="status">
+        <p>No news</p>
+    </div>
     {% endfor %}
 </div>

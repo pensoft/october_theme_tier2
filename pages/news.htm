@@ -17,13 +17,13 @@ function onStart()
 {
 	$this['article'] = Pensoft\Articles\Models\Article::where('slug', $this->param('id'))->first();
     $this['categories'] = Category::orderBy('sort_order')->orderBy('created_at', 'desc')->get();
-	
+
     $categoryId = input('categoryId', 'all');
 
     if ($categoryId !== 'all' && !is_numeric($categoryId)) {
         return redirect('news');
     }
-	
+
     $this['categoryId'] = $categoryId;
 
     if ($categoryId === 'all') {
@@ -120,72 +120,111 @@ $this['related'] = $related;
 }
 ?>
 ==
-<div class="container">
-    {% if is_detail_page %}
-    <div class="row single-news-item">
+<main id="main-content" role="main">
+    <div class="container">
+        {% if is_detail_page %}
+        <article class="row single-news-item">
 
 
-        <div class="col-xs-12 col-md-7">
+            <div class="col-xs-12 col-md-7">
 
 
 
-            <div class="news-title">
-                <h1 class="single-new-title">{{article.title}}</h1>
+                <header class="news-title">
+                    <h1 class="single-new-title">{{article.title}}</h1>
+                </header>
+                <time class="text-published" datetime="{{article.published_at|date('Y-m-d')}}">{{article.pretty_published_at}}</time>
+                <div class="content">
+                    {{article.content|raw}}
+                </div>
             </div>
-            <div class="text-published">{{article.pretty_published_at}}</div>
-            <div class="content">
-                {{article.content|raw}}
-            </div>
-        </div>
-        <div class="col-xs-12 col-md-5">
-            {% if article.cover %}
-            <div class="row">
-                <img class="content left" src="{{ article.cover|resize(673, auto, { mode: 'crop' }) }}" />
-            </div>
-            {% endif %}
-            {% if article.caption %}
-                {{article.caption|raw}}
+            <aside class="col-xs-12 col-md-5">
+                {% if article.cover %}
+                <figure class="row">
+                    <img class="content left" src="{{ article.cover|resize(673, auto, { mode: 'crop' }) }}" alt="{{article.title}}" />
+                    {% if article.caption %}
+                    <figcaption>{{article.caption|raw}}</figcaption>
+                    {% endif %}
+                </figure>
                 {% endif %}
-            <div class="row share_container middle-xs">
-                <div class="col-cx-2 start-xs">Share</div>
-                <div class="col-cx-10 end-xs">
-                    {% if this.theme.twitter %}
-                    <a href="http://twitter.com/share?text={{article.title}}&url={{page_url}}" target="_blank" class="btn p-primary pr p-twitter normal" style="font-size: 16px; margin: right 0;"></a>
-                    {% endif %}
-                    {% if this.theme.facebook %}
-                    <a href="https://www.facebook.com/sharer/sharer.php?u={{page_url}}&amp;src=sdkpreparse" target="_blank" class="btn pr p-primary p-facebook normal"></a>
-                    {% endif %}
-                    {% if this.theme.linkedin %}
-                    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{page_url}}" target="_blank" class="btn pr p-primary p-linkedin normal"></a>
-                    {% endif %}
-                    <a href="https://bsky.app/intent/compose?text={{article.title}}20%{{page_url}}" target="_blank" class="btn pr p-primary p-bluesky small" style="font-size: 16px !important;"></a>
+
+                <nav class="row share_container middle-xs" aria-label="Share this article">
+                    <div class="col-cx-2 start-xs">Share</div>
+                    <div class="col-cx-10 end-xs">
+                        {% if this.theme.twitter %}
+                        <a href="http://twitter.com/share?text={{article.title}}&url={{page_url}}"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="btn p-primary pr p-twitter normal share-twitter"
+                           aria-label="Share on Twitter (opens in new window)">
+                            <span class="sr-only">Twitter</span>
+                        </a>
+                        {% endif %}
+                        {% if this.theme.facebook %}
+                        <a href="https://www.facebook.com/sharer/sharer.php?u={{page_url}}&amp;src=sdkpreparse"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="btn pr p-primary p-facebook normal"
+                           aria-label="Share on Facebook (opens in new window)">
+                            <span class="sr-only">Facebook</span>
+                        </a>
+                        {% endif %}
+                        {% if this.theme.linkedin %}
+                        <a href="https://www.linkedin.com/sharing/share-offsite/?url={{page_url}}"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="btn pr p-primary p-linkedin normal"
+                           aria-label="Share on LinkedIn (opens in new window)">
+                            <span class="sr-only">LinkedIn</span>
+                        </a>
+                        {% endif %}
+                        <a href="https://bsky.app/intent/compose?text={{article.title}}20%{{page_url}}"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="btn pr p-primary p-bluesky small share-bluesky"
+                           aria-label="Share on Bluesky (opens in new window)">
+                            <span class="sr-only">Bluesky</span>
+                        </a>
                     </div>
+                </nav>
+
+            </aside>
+        </article>
+
+        {% else %}
+
+        <section aria-labelledby="news-heading">
+            <h1 id="news-heading" class="sr-only">News</h1>
+
+            <nav class="category-tabs-container mb-2" aria-label="News categories">
+                {% if categories.count > 0 %}
+                <div class="row category-tabs" id="category-tabs" role="tablist">
+                    <a href="{{ 'news'|page }}"
+                       role="tab"
+                       aria-selected="{{ 'all' == categoryId ? 'true' : 'false' }}"
+                       class="{{ 'all' == categoryId ? 'active' : '' }}">All News</a>
+                    {% for category in categories %}
+                    <a href="{{ 'news'|page }}?categoryId={{ category.id }}"
+                       role="tab"
+                       aria-selected="{{ category.id == categoryId ? 'true' : 'false' }}"
+                       class="{{ category.id == categoryId ? 'active' : '' }}">{{ category.name }}</a>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </nav>
+
+            <div class="newslist-records" id="newslist-records" role="region" aria-live="polite">
+                {% partial 'components/newslist-records' %}
             </div>
-
-        </div>
-    </div>
-
-    {% else %}
-
-    <div class="category-tabs-container mb-2">
-        {% if categories.count > 0 %}
-        <div class="row category-tabs" id="category-tabs">
-            <a href="{{ 'news'|page }}" class="{{ 'all' == categoryId ? 'active' : '' }}">All News</a>
-            {% for category in categories %}
-            <a href="{{ 'news'|page }}?categoryId={{ category.id }}" class="{{ category.id == categoryId ? 'active' : '' }}">{{ category.name }}</a>
-            {% endfor %}
-        </div>
+            <nav class="row container" aria-label="Pagination">
+                {{ records.render|raw }}
+            </nav>
+        </section>
         {% endif %}
+
     </div>
 
-    <div class="newslist-records" id="newslist-records">
-        {% partial 'components/newslist-records' %}
-    </div>
-    <div class="row container">
-        {{ records.render|raw }}
-    </div>
-    {% endif %}
-    
-</div>
-
-<a class="toTheTop" title="Back to the top">&nbsp;</a>
+    <a href="#headernavbar" class="toTheTop" aria-label="Back to the top">
+        <span class="sr-only">Back to the top</span>
+    </a>
+</main>

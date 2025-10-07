@@ -9,8 +9,11 @@ robot_follow = "follow"
 category = 2
 maxItems = 10
 ==
-<div class="container-fluid banner">
-	<div class="container advisory-board-container2">
-		{% component 'profile_records' %}
-	</div>
-</div>
+<main id="main-content" role="main">
+    <section class="container-fluid banner" aria-labelledby="advisory-board-heading">
+        <h1 id="advisory-board-heading" class="sr-only">Advisory board</h1>
+        <div class="container advisory-board-container2">
+            {% component 'profile_records' %}
+        </div>
+    </section>
+</main>

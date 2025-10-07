@@ -43,81 +43,102 @@ return Profiles::where('partner_id', $id)->where('category_id',  3)->get();
 }
 ?>
 ==
-<div class="container-fluid partners_background">
-    <div class="svg_map">
-        {% partial 'components/svg' %}
-    </div>
-    <div class="container">
-        <span class="tooltiptext" id="tooltip">Bulgaria</span>
-        <div class="row">
-            <div class="col-md-7 col-xs-12 partners_list">
-                <div class="row">
-                    <div class="col-xs-12">
-                        {% for partner in partners %}
-                        <a class="parener_logo" onclick="onCustomSinglePartner({{partner.id}});" title="{{partner.instituion}}"><img class="partner_cover" src="{{partner.cover.thumb(116, auto, {'mode':'crop'})}}"></a>
-                        {% endfor %}
-                    </div>
-                </div>
-                <div class="row assoc_partners half-a-border-on-top">
-                    <div class="col-xs-12">
-                        {% for item in a_partners %}
-                        <div class="row partner-item middle-xs aff">
-                            <div class="col-md-3 col-xs-12"><a class="parener_logo" onclick="onCustomSinglePartnerA({{item.id}});" title="{{item.instituion}}"><img class="partner_cover" src="{{item.cover.thumb(116, auto, {'mode':'crop'})}}"></a></div>
-                            <div class="col-md-9 col-xs-12">
-                                <div class="assoc_partner_title partner_title">
-                                    <a onclick="onCustomSinglePartnerA({{item.id}});" title="{{item.instituion}}" style="cursor: pointer;">{{item.instituion}}</a>
-                                </div>
-                            </div>
+<main id="main-content" role="main">
+    <section class="container-fluid partners_background" aria-labelledby="partners-heading">
+        <h1 id="partners-heading" class="sr-only">Partners</h1>
+        <div class="svg_map" role="img" aria-label="Partner locations map">
+            {% partial 'components/svg' %}
+        </div>
+        <div class="container">
+            <div class="tooltiptext" id="tooltip" role="tooltip" aria-live="polite"></div>
+            <div class="row">
+                <div class="col-md-7 col-xs-12 partners_list">
+                    <nav class="row" aria-label="Partner organizations">
+                        <div class="col-xs-12">
+                            {% for partner in partners %}
+                            <a class="parener_logo" onclick="onCustomSinglePartner({{partner.id}});" aria-label="View {{partner.instituion}} details">
+                                <img class="partner_cover" src="{{partner.cover.thumb(116, auto, {'mode':'crop'})}}" alt="{{partner.instituion}} logo">
+                            </a>
+                            {% endfor %}
                         </div>
+                    </nav>
+                    <section class="row assoc_partners half-a-border-on-top" aria-labelledby="associated-heading">
+                        <h2 id="associated-heading" class="sr-only">Associated Partners</h2>
+                        <div class="col-xs-12">
+                            {% for item in a_partners %}
+                            <article class="row partner-item middle-xs aff">
+                                <div class="col-md-3 col-xs-12">
+                                    <a class="parener_logo" onclick="onCustomSinglePartnerA({{item.id}});" aria-label="View {{item.instituion}} details">
+                                        <img class="partner_cover" src="{{item.cover.thumb(116, auto, {'mode':'crop'})}}" alt="{{item.instituion}} logo">
+                                    </a>
+                                </div>
+                                <div class="col-md-9 col-xs-12">
+                                    <h3 class="assoc_partner_title partner_title">
+                                        <a onclick="onCustomSinglePartnerA({{item.id}});" aria-label="View {{item.instituion}} details">
+                                            {{item.instituion}}
+                                        </a>
+                                    </h3>
+                                </div>
+                            </article>
 
-                        {% if insider_members.getIM(partner.id).count > 0 %}
-                        <div id="accordion-insider-members" class="insider-members-accordion">
-                            <div class="accordion-border insider-border">
-                                <div class="row middle-xs accordion-toggle toggle-insider-members">
-                                    <div class="col-xs start-xs member-toggle">Show members</div>
-                                    <div class="col-xs-2 end-xs plusminus">
+                            {% if insider_members.getIM(partner.id).count > 0 %}
+                            <div id="accordion-insider-members" class="insider-members-accordion">
+                                <div class="accordion-border insider-border">
+                                    <a class="row middle-xs accordion-toggle toggle-insider-members"
+                                            aria-expanded="false"
+                                            aria-controls="insider-content-{{item.id}}">
+                                        <span class="col-xs start-xs member-toggle">Show members</span>
+                                        <span class="col-xs-2 end-xs plusminus" aria-hidden="true">
                                         <span class="plus"></span>
-                                    </div>
-                                </div>
-                                <div class="accordion-content insider-partners" style="display: none;">
-                                    <div class="row top-xs">
-                                        {% for profile in insider_members.getIM(partner.id) %}
-                                        <div class="col-xs-12 insider-content">
-                                            <div class="row insider-content-row">
-                                                <div class="col-md-5 col-xs-12 insider_image">
-                                                    {% if profile.avatar %}
-                                                    <img alt="{{ profile.names }}" src="{{profile.avatar|crop_image}}">
-                                                    {% else %}
-                                                    <img alt="{{ profile.names }}" src="{{ 'avatar.svg'|media }}" width="119" height="119" class="no-image">
-                                                    {% endif %}
+                                    </span>
+                                    </a>
+                                    <div class="accordion-content insider-partners"
+                                         id="insider-content-{{item.id}}"
+                                         role="region"
+                                         aria-labelledby="members-heading-{{item.id}}"
+                                         hidden>
+                                        <h4 id="members-heading-{{item.id}}" class="sr-only">Team Members</h4>
+                                        <div class="row top-xs">
+                                            {% for profile in insider_members.getIM(partner.id) %}
+                                            <article class="col-xs-12 insider-content">
+                                                <div class="row insider-content-row">
+                                                    <div class="col-md-5 col-xs-12 insider_image">
+                                                        {% if profile.avatar %}
+                                                        <img alt="{{profile.names}}" src="{{profile.avatar|crop_image}}">
+                                                        {% else %}
+                                                        <img alt="{{profile.names}}" src="{{ 'avatar.svg'|media }}" width="119" height="119" class="no-image">
+                                                        {% endif %}
+                                                    </div>
+                                                    <div class="col-md-7 col-xs-12 insider_info">
+                                                        <h5>{{profile.names}}</h5>
+                                                        <div class="insider_info_content">{{profile.content|raw}}</div>
+                                                    </div>
                                                 </div>
-                                                <div class="col-md-7 col-xs-12 insider_info">
-                                                    <h4>{{ profile.names }}</h4>
-                                                    <div class="insider_info_content">{{ profile.content|raw }}</div>
-                                                </div>
-                                            </div>
+                                            </article>
+                                            {% endfor %}
                                         </div>
-                                        {% endfor %}
                                     </div>
                                 </div>
                             </div>
+                            {% endif %}
+
+
+                            {% endfor %}
                         </div>
-                        {% endif %}
+                    </section>
+                    <a href="#headernavbar" class="toTheTop" aria-label="Back to the top">
+                        <span class="sr-only">Back to the top</span>
+                    </a>
+                    <div class="row container partners-map-container">
+                        <div id="mycomponentpartners" class="row" role="region" aria-live="polite" aria-label="Partner details">
+                        </div>
 
-
-                        {% endfor %}
                     </div>
                 </div>
-                <a class="toTheTop" title="Back to the top">&nbsp;</a>
-                <div class="row container partners-map-container">
-                    <div id="mycomponentpartners" class="row">
-                    </div>
-
-                </div>
+                <div class="col-md-5 col-xs-12"></div>
             </div>
-            <div class="col-md-5 col-xs-12"></div>
+
         </div>
 
-    </div>
-
-</div>
+    </section>
+</main>
