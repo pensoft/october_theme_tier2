@@ -124,8 +124,9 @@ p:has(.edit-link){
                 line-height: 75px;
             });
             .breakpoint-huge-down({
-                font-size: 40px;
-                line-height: 60px;
+                font-size: 35px;
+                line-height: 47px;
+                margin-bottom: 10px;
             });
         }
         .container{
@@ -159,7 +160,7 @@ p:has(.edit-link){
         }
 
         .intro{
-            max-width: 50%;
+            max-width: 100%;
             display: flex;
             justify-content: space-evenly;
             flex-direction: column;
@@ -180,6 +181,8 @@ p:has(.edit-link){
 
                 .breakpoint-small-down({
                     max-width: 65%;
+                    margin-top: 0px;
+                    height: 110px;
                 });
             }
 
@@ -191,6 +194,69 @@ p:has(.edit-link){
                 .breakpoint-small-down({
                    text-shadow: 3px 0 #ffffff;
                 });
+            }
+
+            .training_modules{
+                width: 300px;
+                height: 300px;
+                max-width: 25vw;
+                max-height: 25vw;
+                border-radius: 50%;
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                background: @link-color;
+                color: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.5em;
+                justify-self: center;
+                text-align: center;
+                flex-direction: column;
+                line-height: 1.5em;
+                transition: all 0.3s ease-in-out;
+
+                .breakpoint-large-down({
+                    position: relative;
+                    top: unset;
+                    transform: unset;
+                    max-width: 40vw;
+                    max-height: 40vw;
+                    font-size: 1em;
+                });
+
+                &:hover{
+                    background: #34CBBF;
+                }
+
+                i{
+                    width: 100%;
+                    height: 33px;
+                    display: block;
+                    background: url("../../assets/images/training-modules-icon.svg") center no-repeat;
+                    background-size: contain;
+                    margin-bottom: 10px;
+                    .breakpoint-large-down({
+                        display: none;
+                    });
+                }
+
+                &:before{
+                    content: '';
+                    width: 315px;
+                    height: 315px;
+                    max-width: calc(~'25vw + 15px');
+                    max-height: calc(~'25vw + 15px');
+                    border-radius: 50%;
+                    position: absolute;
+                    border: 1px solid @link-color;
+                    display: flex;
+                    .breakpoint-large-down({
+                        display: none;
+                    });
+
+                }
             }
 
             .breakpoint-laptop-down({
