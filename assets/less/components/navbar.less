@@ -1,4 +1,5 @@
 
+
 .navbar {
     position: absolute;
     width: 100vw;
@@ -12,14 +13,27 @@
     transition: background-color 0.3s;
     box-sizing: border-box;
 
+    .container{
+        padding: 0;
+        width: -webkit-fill-available;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
     a {
         color: @navbar-font-color;
+        font-family: Gilroy;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 22px; /* 157.143% */
     }
 
     &.fixed {
         position: fixed;
         z-index: @zindex-fixed;
-        background: @dark-color;
+        //background: @dark-color;
     }
 
     &.scrolled {
@@ -48,12 +62,13 @@
 
     .navbar-brand {
       display: flex;
-      flex-basis: 155px;
-      height: 50px;
+      flex-basis: 84px;
+      height: 42px;
       background-repeat: no-repeat;
-      //.breakpoint-small-down({
-      //  flex-basis: 205px;
-      //});
+        margin-left: 90px;
+      .breakpoint-large-down({
+          margin-left: 20px;
+      });
     }
 
     .navbar-nav{
@@ -80,11 +95,12 @@
 
     .navbar-collapse {
         display: flex;
-        flex-basis: 100%;
         flex-grow: 1;
         flex-direction: column-reverse;
         align-items: center;
         background-color: inherit;
+        width: fit-content;
+        justify-content: center;
 
         .navbar-nav {
             display: flex;
@@ -102,8 +118,8 @@
             box-sizing: border-box;
             align-items: center;
             z-index: @zindex-dropdown;
-            .font-size(2);
-            font-weight: 500;
+            //.font-size(2);
+            //font-weight: 500;
 
             .nav-item {
                 display: block;
@@ -153,15 +169,15 @@
                         margin-top: 9px!important;
                     }
 
-                    
+
 
                       .dropdown-menu a:before {
                           background:transparent!important;
                       }
 
-                } 
+                }
 
-                
+
 
                 background-color: inherit;
 
@@ -169,7 +185,7 @@
         }
     }
 
-    
+
 
 
     .breakpoint-large({
@@ -183,7 +199,6 @@
         }
         .navbar-collapse {
             display: flex !important;
-            -ms-flex-preferred-size: 100%;
             flex-basis: auto !important;
             -ms-flex-positive: 1;
             -ms-flex-align: center;
@@ -191,13 +206,12 @@
             flex-direction: row;
             padding-left: 0;
             padding-right: 0;
-            width: 100%;
 
             .navbar-nav {
                 justify-content: flex-start;
                 flex-direction: row;
                 width: 100%;
-                .font-size(1);
+                //.font-size(1);
 
 
                 .nav-item {
@@ -217,7 +231,7 @@
                         margin-left: 15px;
                             a{
                                 padding: 0!important;
-                                font-size: 16px;
+                                //font-size: 16px;
                                 margin-bottom: 10px;
                                 color: @white-color!important;
                                 &:hover{
@@ -238,14 +252,14 @@
   });
 }
 
-.home{
-    .navbar-brand {
-        display: none!important;
-        &.scrolled{
-            display: flex!important;
-        }
-
-    }
+.home, .home-final{
+    //.navbar-brand {
+    //    //display: none!important;
+    //    &.scrolled{
+    //        display: flex!important;
+    //    }
+    //
+    //}
     .navbar{
         &.fixed {
             background: none;
@@ -371,6 +385,28 @@
 
   .search-btn{
     cursor: pointer;
+      display: flex;
+      width: 70px;
+      align-items: center;
+      gap: 8px;
+      border-radius: 8px;
+      background: #252F6F url("../../assets/images/search-icon.svg") no-repeat;
+      background-position: 16px center;
+      background-size: 15px;
+      box-shadow: 0 4px 16px 0 rgba(23, 23, 23, 0.04);
+      padding-left: 43px;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      padding-right: 0;
+      margin-right: 90px;
+
+      &:hover{
+          opacity: 0.6;
+      }
+
+      .breakpoint-large-down({
+          display: none;
+      })
   }
 
   #menuToggle{
@@ -386,7 +422,7 @@
     flex-direction: column;
     position: absolute;
     right: 24px;
-    top: 40px;
+    top: 32px;
     z-index: 1;
     -webkit-user-select: none;
     user-select: none;

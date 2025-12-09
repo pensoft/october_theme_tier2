@@ -129,6 +129,21 @@ $(document).ready(function() {
 		}
 	});
 
+
+	$('body').on('click', '.homepage_events .accordion-toggle', function () {
+		if ($(this).next(".accordion-content").is(':visible')) {
+			$(this).next(".accordion-content").slideUp(300);
+			$(this).children(".plusminus").html('<span class="plus">&nbsp;</span>');
+            $(this).removeClass('open');
+            $(this).parent().removeClass('open');
+		} else {
+			$(this).next(".accordion-content").slideDown(300);
+			$(this).children(".plusminus").html('<span class="minus">&nbsp;</span>');
+            $(this).addClass('open');
+            $(this).parent().addClass('open');
+		}
+	});
+
     /* Handle text and plus/minus changes on toggle **/
     $('body').on('click', '.insider-border .accordion-toggle', function () {
         var $accordionContent = $(this).next(".accordion-content");
@@ -320,6 +335,24 @@ $(document).ready(function() {
 
 	});
 
+
+	$('.modal-content .modal-body ul').each(function(){
+        $(this).before('<div class="learn_more_modal">Learn more</div>');
+        $(this).wrapAll("<div class='toogle-contact-paragraphs'></div>")
+	});
+
+	$('.learn_more_modal').click(function () {
+		var link = $(this);
+		link.next('.toogle-contact-paragraphs').slideToggle('slow', function() {
+			// if ($(this).is(':visible')) {
+			// 	link.text('Learn less');
+			// } else {
+			// 	link.text('Learn more');
+			// }
+		});
+
+	});
+
 	$('.see_all_partners_link').hide();
 
     // Handle the back to top arrow
@@ -353,6 +386,19 @@ $(document).ready(function() {
         return false;
     });
 });
+
+
+
+
+
+function openEventModalBtn(){
+    setTimeout(function() {
+        $(".openEventModalBtn").trigger("click");
+    },10);
+}
+
+
+
 
 function onHashChange(){
 	$("path").removeClass('active_path');
