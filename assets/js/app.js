@@ -936,7 +936,7 @@ function init() {
                 });
             }
         }
-		appendSearchAndSocialMedia()
+		// appendSearchAndSocialMedia()
 		requestFormLibrary()
 
 		// requestFormPartners()
