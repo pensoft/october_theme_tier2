@@ -1704,12 +1704,26 @@ now override the 3.3 new styles for modern browsers & apply opacity
 
         svg.graphic_home{
             max-width: 100%;
+            path{
+                outline: none;
+            }
             a{
                 outline: none;
                 &:hover{
-                    rect{
+                    path{
                         fill: rgba(13, 37, 87, 0.6);
                     }
+                }
+
+                text, tspan{
+                    fill: #F1F1F1;
+                    //text-align: center;
+                    //font-family: Gilroy;
+                    //font-size: 20px;
+                    //font-style: normal;
+                    //font-weight: 600;
+                    //line-height: 140%; /* 28px */
+                    letter-spacing: -0.5px;
                 }
             }
         }
