@@ -130,19 +130,24 @@ $(document).ready(function() {
 	});
 
 
-	$('body').on('click', '.homepage_events .accordion-toggle', function () {
-		if ($(this).next(".accordion-content").is(':visible')) {
-			$(this).next(".accordion-content").slideUp(300);
-			$(this).children(".plusminus").html('<span class="plus">&nbsp;</span>');
-            $(this).removeClass('open');
-            $(this).parent().removeClass('open');
-		} else {
-			$(this).next(".accordion-content").slideDown(300);
-			$(this).children(".plusminus").html('<span class="minus">&nbsp;</span>');
-            $(this).addClass('open');
-            $(this).parent().addClass('open');
-		}
-	});
+    $('body').on('click', '.homepage_events .accordion-toggle', function () {
+        var $this = $(this);
+        var isOpen = $this.hasClass('open');
+
+        // Close all items
+        $('.homepage_events .accordion-content').slideUp(300);
+        $('.homepage_events .accordion-toggle').removeClass('open')
+            .children(".plusminus").html('<span class="plus">&nbsp;</span>');
+        $('.homepage_events .accordion-toggle').parent().removeClass('open');
+
+        // If clicked item was closed, open it
+        if (!isOpen) {
+            $this.next(".accordion-content").slideDown(300);
+            $this.children(".plusminus").html('<span class="minus">&nbsp;</span>');
+            $this.addClass('open');
+            $this.parent().addClass('open');
+        }
+    });
 
     /* Handle text and plus/minus changes on toggle **/
     $('body').on('click', '.insider-border .accordion-toggle', function () {
