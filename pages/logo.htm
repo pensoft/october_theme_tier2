@@ -74,21 +74,24 @@ return Redirect::to('/media-center/logo');
                         <h2>Download {{record.name}}</h2>
                         <div class="download-buttons">
                             {% if record.file_jpg %}
-                            <a href="{{ ''| page }}?{{queries}}&download={{record.file_jpg.id}}&file_name={{record.file_jpg.file_name|replace({' ': '_'})}}"
+<!--                            <a href="{{ ''| page }}?{{queries}}&download={{record.file_jpg.id}}&file_name={{record.file_jpg.file_name|replace({' ': '_'})}}"-->
+                            <a href="{{ record.file_jpg.path }}" target="_blank"
                                class="btn btn-primary"
                                aria-label="Download {{record.name}} logo in JPG format">
                                 <i class="pr p-download" aria-hidden="true"></i> JPG
                             </a>
                             {% endif %}
                             {% if record.file_png %}
-                            <a href="{{ ''| page }}?{{queries}}&download={{record.file_png.id}}&file_name={{record.file_png.file_name|replace({' ': '_'})}}"
+<!--                            <a href="{{ ''| page }}?{{queries}}&download={{record.file_png.id}}&file_name={{record.file_png.file_name|replace({' ': '_'})}}"-->
+                            <a href="{{ record.file_png.path }}" target="_blank"
                                class="btn btn-primary"
                                aria-label="Download {{record.name}} logo in PNG format">
                                 <i class="pr p-download" aria-hidden="true"></i> PNG
                             </a>
                             {% endif %}
                             {% if record.file_eps %}
-                            <a href="{{ ''| page }}?{{queries}}&download={{record.file_eps.id}}&file_name={{record.file_eps.file_name|replace({' ': '_'})}}"
+<!--                            <a href="{{ ''| page }}?{{queries}}&download={{record.file_eps.id}}&file_name={{record.file_eps.file_name|replace({' ': '_'})}}"-->
+                            <a href="{{ record.file_eps.path }}" target="_blank"
                                class="btn btn-primary"
                                aria-label="Download {{record.name}} logo in SVG vector format">
                                 <i class="pr p-download" aria-hidden="true"></i> SVG
