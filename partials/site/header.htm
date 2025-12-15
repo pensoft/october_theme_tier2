@@ -12,53 +12,95 @@ title = 0
 templates = "template2"
 description_limit = 0
 ==
+<nav class="navbar fixed" id="headernavbar" {% if user %} style="margin-top:69px;"{% endif %}>
 
-    <nav class="navbar fixed" id="headernavbar" aria-label="Main navigation">
-
-        <a href="{{'home'|page}}" class="navbar-brand" id="navbar-brand" aria-label="Home" style="background-image: url('{{ this.theme.site_logo.getPath() }}'); background-position: center; background-size: contain;">
-            <span class="sr-only">Home</span>
+        <a href="{{'home'|page}}" class="navbar-brand">
+            <img src="{{ this.theme.site_logo.getPath() }}" alt="{{ this.theme.site_name }}">
         </a>
 
-        <div class="container">
-            <div id="menuToggle">
-                <input type="checkbox" id="menu-toggle-checkbox" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu" />
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                {% component 'menu' %}
+        <!-- Desktop header elements -->
+        <div class="desktop-header-elements">
+            <div class="search-container">
+                <button class="btn search-btn" id="searchToggle" aria-label="Open search" type="button">
+                    <span class="search-icon"></span>
+                </button>
             </div>
-            <div class="navbar-collapse collapse end-xs" id="headerNavbarNav" style="display: none;">
-                {% component 'menu' %}
-                <div id="headerNavbarLogin">
-                    <ul class="navbar-nav" style="padding: 0; margin: 0;" role="list">
-
-                    </ul>
-                </div>
-            </div>
+            <button id="desktopMenuToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
 
 
-        <a class="middle search-btn" onclick="showSearchForm();" aria-label="Open search" aria-expanded="false" aria-controls="search">
-            Search
-        </a>
+    <div class="navbar-collapse" id="headerNavbarNav">
+        <button id="closeMenuBtn" aria-label="Close navigation">
+            <span>&times;</span>
+        </button>
 
+        {% component 'menu' %}
 
-        <div id="search" class="search" style="display: none;" role="search" aria-label="Site search">
-            <a class="close-search" onclick="hideSearchForm();" aria-label="Close search">
-                <span class="sr-only">Close</span>
-            </a>
-            <form class="input-group align-items-start" action="{{ url('search')}}" method="get">
-                <label for="search-input" class="sr-only">Search</label>
-                <input class="form-control search_input" id="search-input" style="color: #000;" name="q" type="text" autocomplete="on" placeholder="Search" aria-label="Search query">
-                <a class="btn btn-link pr p-search big text-grey-search-btn" type="submit" aria-label="Submit search">
-                    <span class="sr-only">Search</span>
-                </a>
+    </div>
+
+    <!-- Search overlay - positioned outside hamburger menu for proper z-index layering -->
+    <div id="search" class="search" style="display: none;">
+        <div class="container">
+            <form class="input-group align-items-start" action="{{ url('search')}}" method="get" role="search">
+                <label for="searchInput" class="sr-only">Search</label>
+                <input id="searchInput" class="form-control search_input" style="color: #000;" name="q" type="text" autocomplete="on" placeholder="Search here..." aria-label="Search">
+                <button class="btn btn-link pr p-search big text-grey-search-btn" type="submit" aria-label="Submit search"></button>
+                <button type="button" class="close-search" onclick="hideSearchForm();" aria-label="Close search">&#10006;</button>
             </form>
         </div>
+    </div>
+</nav>
+
+<!--    <nav class="navbar fixed" id="headernavbar" aria-label="Main navigation">-->
+
+<!--        <a href="{{'home'|page}}" class="navbar-brand" id="navbar-brand" aria-label="Home" style="background-image: url('{{ this.theme.site_logo.getPath() }}'); background-position: center; background-size: contain;">-->
+<!--            <span class="sr-only">Home</span>-->
+<!--        </a>-->
+
+<!--        <div class="container">-->
+<!--            <div id="menuToggle">-->
+<!--                <input type="checkbox" id="menu-toggle-checkbox" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu" />-->
+<!--                <span aria-hidden="true"></span>-->
+<!--                <span aria-hidden="true"></span>-->
+<!--                <span aria-hidden="true"></span>-->
+<!--                {% component 'menu' %}-->
+<!--            </div>-->
+<!--            <div class="navbar-collapse collapse end-xs" id="headerNavbarNav" style="display: none;">-->
+<!--                {% component 'menu' %}-->
+<!--                <div id="headerNavbarLogin">-->
+<!--                    <ul class="navbar-nav" style="padding: 0; margin: 0;" role="list">-->
+
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
+
+<!--        <a class="middle search-btn" onclick="showSearchForm();" aria-label="Open search" aria-expanded="false" aria-controls="search">-->
+<!--            Search-->
+<!--        </a>-->
+
+
+<!--        <div id="search" class="search" style="display: none;" role="search" aria-label="Site search">-->
+<!--            <a class="close-search" onclick="hideSearchForm();" aria-label="Close search">-->
+<!--                <span class="sr-only">Close</span>-->
+<!--            </a>-->
+<!--            <form class="input-group align-items-start" action="{{ url('search')}}" method="get">-->
+<!--                <label for="search-input" class="sr-only">Search</label>-->
+<!--                <input class="form-control search_input" id="search-input" style="color: #000;" name="q" type="text" autocomplete="on" placeholder="Search" aria-label="Search query">-->
+<!--                <a class="btn btn-link pr p-search big text-grey-search-btn" type="submit" aria-label="Submit search">-->
+<!--                    <span class="sr-only">Search</span>-->
+<!--                </a>-->
+<!--            </form>-->
+<!--        </div>-->
 
 
 
-    </nav>
+<!--    </nav>-->
 
 
 
