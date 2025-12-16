@@ -446,9 +446,12 @@ function closeEventInfoBar(){
 
 
 function openEventModalBtn(){
-    setTimeout(function() {
-        $(".openEventModalBtn").trigger("click");
-    },10);
+    let info = getCookie("finalEventInfoMessage");
+    if (!info) {
+        setTimeout(function () {
+            $(".openEventModalBtn").trigger("click");
+        }, 10);
+    }
 }
 
 
